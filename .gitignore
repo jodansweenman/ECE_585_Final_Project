@@ -50,3 +50,14 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Other files
+*.o
+*.dev
+*.exe
+*.ico
+*.layout
+*.h
+*.rc
+*.res
+*.win
