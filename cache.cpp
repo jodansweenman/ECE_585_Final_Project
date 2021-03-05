@@ -162,6 +162,69 @@ int main(int argc, char** argv) {
  	
  }
  
+  /* L1 Cache Read function
+ * This function will attempt to read a line from the cache
+ * On a cache miss, the LRU member is evicted if the cache is full
+ *
+ * Input: Address to read from the cache
+ * Output: pass = 0, fail != 0
+ */
+ 
+ int cache_read(unsigned int addr) {
+ 	
+ 	unsigned int tag;					// Cache tag decoded from incoming address
+ }
+ 
+int cache_write(unsigned int addr) {
+	
+}
+
+int instruction_fetch(unsigned int addr) {
+	
+}
+
+  /* L2 Invalidate Command function
+ * This function will simulate an L2 Invalidate command
+ * This will have the MESI bit of the input address set to 'I'
+ *
+ * Input: Address to invalidate
+ * Output: pass = 0, fail != 0
+ */
+int invalidate_command(unsigned int addr) {
+	
+	unsigned int tag = addr >> (6 + 14) // tag = address >> (byte + set), where our byte amount is 6 bits and the set is 14
+	
+	// Search data cache for a matching tag
+	for (int i = 0; i < 8; ++i) {
+		if (data_cache[i].tag == tag) {
+			switch (data_cache[i].MESI) {
+				case 'M':
+					data_cache[i].MESI = 'I';	// Change MESI bit to Invalid
+					break;
+					
+				case 'E':
+					data_cache[i].MESI = 'I';	// Change MESI bit to Invalid
+					break;
+					
+				case 'S':
+					data_cache[i].MESI = 'I';	// Change MESI bit to Invalid
+					break;
+					
+				case 'I':
+					return 0;					// Do nothing as state is already invalid
+					
+				default:
+					return -1;					// Non-MESI state recorded. ERROR
+			}
+		}
+	}
+	return 0;	
+}
+
+int snooping(unsigned int addr) {
+	
+}
+ 
  /* Cache Reset function
  * This function resets the cache controller and clears statistics
  *
@@ -171,22 +234,20 @@ int main(int argc, char** argv) {
  
  void reset_cache() {
  	
-	 int i;
-	 
 	 cout << "Resetting the Cache Controller and Clearing Stats..." << endl;
 	 
 	 // Clearing the data cache
-	 for (i = 0; i < 8; i ++) {
+	 for (int i = 0; i < 8; ++i) {
 	 	data_cache[i].tag = 0;
 	 	data_cache[i].LRU = 0;
 	 	data_cache[i].MESI = "I";
 	 }
 	 
 	 // Clearing the instruction cache
-	 for (i = 0; i < 4; i ++) {
-	 	instruction_cache[i].tag = 0;
-	 	instruction_cache[i].LRU = 0;
-	 	instruction_cache[i].MESI = "I";
+	 for (int j = 0; j < 4; ++j) {
+	 	instruction_cache[j].tag = 0;
+	 	instruction_cache[j].LRU = 0;
+	 	instruction_cache[j].MESI = "I";
 	 }
 	 
 	 // Resetting all stats for data cache
@@ -205,3 +266,6 @@ int main(int argc, char** argv) {
 	 return;
  	
  }
+void print_cache() {
+	
+}
