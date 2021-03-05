@@ -1,0 +1,111 @@
+Nguyen Pham
+(Anthony)
+
+----------------------------------Cache Structure-----------------------------
+
+*** The instruction cache:
+ 	16K sets
+ 	64 byte lines
+ 	4-way association
+ 	Capacity = 16K x 64 x 4 = 4MB
+ 
+ Addressing bits per line:
+ 	14 address bits for the index/set (1 address for each set)
+ 	6 address bits for the byte select(1 address for each byte in a line)
+ 	12 address bits for the tag
+ 
+ Tag Array
+ 	2 x 4 = 8 bits per set for the LRU
+ 	2 x 4 = 8 bits per set for the MESI
+ 	12 x 4 = 48 tag bits per set
+ 	Size for the tag array for entire instruction cache is: [(8 + 8 + 48) x 16K]/ 8B = 128KB
+
+*** The data cache:
+ 	16K sets
+ 	64 byte lines
+ 	8-way association
+ 	Capacity = 16K x 8 x 64 = 8MB
+ 
+ Addressing bits per line
+ 	14 address bits for the index/set (1 address for each set)
+ 	6 address bits for the byte select (1 address for each byte in a line)
+ 	12 address bits for the tag
+ 
+ Tag Array
+ 	3 x 8 = 24 bits per set for the LRU
+ 	2 x 8 = 16 bits per set for the MESI
+ 	8 x 12 = 96 tag bits per set
+ 	Size for the tag array for entire instruction cache is: [(24 + 16 + 96) x 16K]/ 8B = 272KB
+
+*** The instruction and the data caches share addresses
+
+-----------------------------------------------------------------------------------
+Mode:
+0 read data request to L1 data cache
+	Data Read
+1 write data request to L1 data cache
+	Data Write
+2 instruction fetch (a read request to L1 instruction cache)
+	Call for the instruction cache to read an instruction
+	Instruction Read
+
+3 invalidate command from L2
+	It happens right after a snoop, L2 will sends out invalidate once aother processor receives data
+	Update MESI
+				
+4 data request from L2 (in response to snoop)
+	L2 is checking to see if L1 has other data that a different processor is looking for
+	Update MESI
+
+8 clear the cache and reset all state (and statistics)
+	Clear Instruction Cache
+	Clear Data Cache
+9 print contents and state of the cache (allow subsequent trace activity)
+	Display Read, Write, Miss, Hit, Hit rate
+
+
+----------------------------Pseudo Code---------------------------------------------
+
+* MESI UPDATE Class:
+	     
+	if Read (mode 0):
+		Check if full cache line
+		If yes
+			If a MESI status on a cache line = I
+				Set MESI status of this cache line to S
+			Else if a MESI status on a cache line = E, and get read from another CPU
+				If cache miss
+					 MESI status on the cache line = E
+				Else, cache hit
+					 MESI status on a cache line = S
+			Else if a MESI status on a cache line = S
+				MESI status on the cache line is still S
+			Else if a MESI status on a cache line = M
+				MESI status on the cache line is still M
+	       Else, there is an empty cache line
+			Set MESI status of this cache line to E
+	
+	if Write (mode 1):
+		Check if full cache line
+		If yes
+			If a MESI status on a cache line = I
+				Set MESI status of this cache line = M
+			Else if a MESI status on a cache line = S
+				Set MESI status of this cache line to M	
+			Else if a MESI status on a cache line = E
+				Set MESI status of this cache line to M
+			Else if a MESI status on a cache line = M
+				Set MESI status of this cache line to M
+		Else, there is an empty cache line
+			If a MESI status on a cache line = I
+				Set MESI status of this cache line = M
+
+	if invalid command from L2 (mode 3):
+		If tag of a cache line  = a tag in mem, and a MESI status on a cache line is not M
+			Set MESI status of this cache line = I		
+
+	
+	if data request from L2 (response for snooping) (mode 4):
+		If tag of a cache line  = a tag in mem, and a MESI status on a cache line is M and write mode
+			Set MESI status of this cache line = S
+		
