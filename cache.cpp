@@ -44,8 +44,8 @@ int cache_write(unsigned int addr);
 int instruction_fetch(unsigned int addr);
 int invalidate_command(unsigned int addr);
 int snooping(unsigned int addr);
-void reset_cache(void);
-void print_cache(void);
+void reset_cache();
+void print_cache();
 int file_parser(char *filename);
 
 // Instantiation of data and instruction caches
@@ -111,16 +111,47 @@ int main(int argc, char** argv) {
  	
  	while (fscanf(fp, "%d %x", &operation, &address) != EOF) {
  		switch(operation) {
- 			case READ:
+ 			case READ :
  				if(cache_read(address)) {
  					cout << "\n\t ERROR: L1 Data Cache Read" << endl;
 				 }
-				break:
-			
+				break;	
+				
 			case WRITE :
 				if(cache_read(address)) {
 					cout << "\n\t ERROR: L1 Data Cache Write" << endl;
-				} 
+				}
+				break;
+			
+			case FETCH :
+				if(instruction_fetch(address)) {
+					cout << "\n\t ERROR: L1 Instruction Cache Fetch" << endl;
+				}
+				break;
+				
+			case INVAL :
+				if(invalidate_command(address)) {
+					cout << "\n\t ERROR: L2 Cache Invalidate Command" << endl;
+				}
+				break;
+			
+			case SNOOP :
+				if(snooping(addr)) {
+					cout << "\n\t ERROR: L2 Snoop Data Request" << endl;
+				}
+				break;
+			
+			case RESET :
+				reset_cache();
+				break;
+			
+			case PRINT :
+				print_cache();
+				break;
+				
+			default :
+				cout << "\n\t ERROR: Invalid Command" << endl;
+				return -1;
 		 }
  		
 	 }
@@ -129,6 +160,48 @@ int main(int argc, char** argv) {
 	 
 	 return 0;
  	
+ }
+ 
+ /* Cache Reset function
+ * This function resets the cache controller and clears statistics
+ *
+ * Input: Void
+ * Output: Void
+ */
+ 
+ void reset_cache() {
  	
+	 int i;
+	 
+	 cout << "Resetting the Cache Controller and Clearing Stats..." << endl;
+	 
+	 // Clearing the data cache
+	 for (i = 0; i < 8; i ++) {
+	 	data_cache[i].tag = 0;
+	 	data_cache[i].LRU = 0;
+	 	data_cache[i].MESI = "I";
+	 }
+	 
+	 // Clearing the instruction cache
+	 for (i = 0; i < 4; i ++) {
+	 	instruction_cache[i].tag = 0;
+	 	instruction_cache[i].LRU = 0;
+	 	instruction_cache[i].MESI = "I";
+	 }
+	 
+	 // Resetting all stats for data cache
+	 stats.data_cache_hit = 0;
+	 stats.data_cache_miss = 0;
+	 stats.data_cache_read = 0;
+	 stats.data_cache_write = 0;
+	 stats.data_ratio = 0.0;
+	 
+	 // Resetting all stats for instruction cache
+	 stats.inst_cache_hit = 0;
+	 stats.inst_cache_miss = 0;
+	 stats.inst_cache_read = 0;
+	 stats.inst_ratio = 0.0;
+	 
+	 return;
  	
  }
