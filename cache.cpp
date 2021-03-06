@@ -6,36 +6,36 @@
 using namespace std;
 
 enum Ops {
-	READ = 0,							// L1 cache read
-	WRITE = 1,							// L1 cache write
-	FETCH = 2,							// L1 instruction fetch
-	INVAL = 3,							// Invalidate command from L2 cache
-	SNOOP = 4,							// Data request to L2 cache
-	RESET = 8,							// Reset cache and clear stats
-	PRINT = 9							// Print the contents of the cache
+	READ = 0,									// L1 cache read
+	WRITE = 1,									// L1 cache write
+	FETCH = 2,									// L1 instruction fetch
+	INVAL = 3,									// Invalidate command from L2 cache
+	SNOOP = 4,									// Data request to L2 cache
+	RESET = 8,									// Reset cache and clear stats
+	PRINT = 9									// Print the contents of the cache
 };
 
 class Cache {
-	unsigned int tag;					// Tag bits
-	unsigned int LRU;					// LRU bits
-	char MESI;							// MESI bits
-	unsigned char data[64];				// 64 bytes of data
-	unsigned int address;				// Address
+	unsigned int tag;							// Tag bits
+	unsigned int LRU;							// LRU bits
+	char MESI;									// MESI bits
+	unsigned char data[64];						// 64 bytes of data
+	unsigned int address;						// Address
 };
 
 class Cache_stats {
 	// Data cache
-	unsigned int data_cache_hit;		// Data cache hit count
-	unsigned int data_cache_miss;		// Data cache miss count
-	unsigned int data_cache_read;		// Data cache read count
-	unsigned int data_cache_write;		// Data cache write count
-	float data_ratio;					// Data hit/miss ratio
+	unsigned int data_cache_hit;				// Data cache hit count
+	unsigned int data_cache_miss;				// Data cache miss count
+	unsigned int data_cache_read;				// Data cache read count
+	unsigned int data_cache_write;				// Data cache write count
+	float data_ratio;							// Data hit/miss ratio
 	
 	// Instruction cache
-	unsigned int inst_cache_hit;		// Instruction cache hit count
-	unsigned int inst_cache_miss;		// Instruction cache miss count
-	unsigned int inst_cache_read;		// Instruction cache read count
-	float inst_ratio;					// Instruction hit/miss ratio
+	unsigned int inst_cache_hit;				// Instruction cache hit count
+	unsigned int inst_cache_miss;				// Instruction cache miss count
+	unsigned int inst_cache_read;				// Instruction cache read count
+	float inst_ratio;							// Instruction hit/miss ratio
 };
 
 // Function declarations
@@ -101,9 +101,9 @@ int main(int argc, char** argv) {
  
  int file_parser(char *filename) {
  	
- 	unsigned int operation;				// Operation parsed from input
- 	unsigned int address;				// Address parsed from input
- 	FILE *fp;							// .txt test file pointer
+ 	unsigned int operation;						// Operation parsed from input
+ 	unsigned int address;						// Address parsed from input
+ 	FILE *fp;									// .txt test file pointer
  	
  	if(!(fp = fopen(filename, "r"))) {
  		cout << "\n\t ERROR: File Cannot Open" << endl;
@@ -172,7 +172,7 @@ int main(int argc, char** argv) {
  
  int cache_read(unsigned int addr) {
  	
- 	unsigned int tag;					// Cache tag decoded from incoming address
+ 	unsigned int tag;							// Cache tag decoded from incoming address
  }
  
 int cache_write(unsigned int addr) {
@@ -221,7 +221,41 @@ int invalidate_command(unsigned int addr) {
 	return 0;	
 }
 
+  /* L2 Snooping function
+ * This function will simulate an L2 Snoop
+ * This function assumes that L2 is telling L1 that the address needs to be invalidated
+ * Therefore the MESI bit will be set to 'I'
+ *
+ * Input: Address to "snoop"
+ * Output: pass = 0, fail != 0
+ */
 int snooping(unsigned int addr) {
+	
+	unsigned int tag = addr >> (6 + 14) 		// tag = address >> (byte + set), where our byte amount is 6 bits and the set is 14
+	
+	for (int i = 0; i < 8; ++i) {
+		if(data_cache[i].tag == tag) {
+			switch (data_cache[i].MESI) {
+				case 'M' :
+					data_cache[i].MESI = 'I';	// Changes the MESI bit to Invalid
+					break;
+				
+				case 'E' :
+					data_cache[i].MESI = 'I';	// Changes the MESI bit to Invalid
+					break;
+				
+				case 'S' :
+					data_cache[i].MESI = 'I';	// Changes the MESI bit to Invalid
+					break;
+				
+				case 'I' :
+					return 0;					// Do nothing as state is already invalid
+				
+				default :
+					return -1;					// Non-MESI state recorded. ERROR
+			}
+		}
+	}
 	
 }
  
