@@ -178,7 +178,7 @@ int main(int argc, char** argv) {
  	
  }
  
-  /* L1 Cache Read function
+/* L1 Cache Read function
  * This function will attempt to read a line from the cache
  * On a cache miss, the LRU member is evicted if the cache is full
  *
@@ -204,15 +204,14 @@ int main(int argc, char** argv) {
 	}
 	
 	// Check for empty space and place if empty
-	if (cache_way >=0) {
+	if (cache_way >= 0 && cache_set >= 0) {
 		data_cache[cache_way][cache_set].tag = tag;
 		data_cache[cache_way][cache_set].set = set;
 		data_cache[cache_way][cache_set].MESI = 'E';
-		// LRU Data Update
-		data_LRU_update(cache_way,cache_set);
-		data_cache[cache_way][cache_set].LRU = 0;
 		data_cache[cache_way][cache_set].address = addr;
 		stats.data_cache_miss++;
+		// LRU Data Update
+		data_LRU_update(cache_way,cache_set);
 	}
 	// If no gap search for hit/miss
 	else {
@@ -240,8 +239,8 @@ int main(int argc, char** argv) {
 					data_cache[cache_way][cache_set].tag = tag;
 					data_cache[cache_way][cache_set].set = set;
 					data_cache[cache_way][cache_set].MESI = 'E';
-					data_LRU_update(cache_way,cache_set);
 					data_cache[cache_way][cache_set].address = addr;
+					data_LRU_update(cache_way,cache_set);
 				}
 				else {
 					cout << "LRU data is invalid" << endl;
@@ -263,32 +262,32 @@ int main(int argc, char** argv) {
 					data_cache[cache_way][cache_set].tag = tag;
 					data_cache[cache_way][cache_set].set = set;
 					data_cache[cache_way][cache_set].MESI = 'M';
-					data_LRU_update(cache_way,cache_set);
 					data_cache[cache_way][cache_set].address = addr;
+					data_LRU_update(cache_way,cache_set);
 					break;
 				
 				case 'E' :
 					data_cache[cache_way][cache_set].tag = tag;
 					data_cache[cache_way][cache_set].set = set;
 					data_cache[cache_way][cache_set].MESI = 'S';
-					data_LRU_update(cache_way,cache_set);
 					data_cache[cache_way][cache_set].address = addr;
+					data_LRU_update(cache_way,cache_set);
 					break;
 				
 				case 'S' :
 					data_cache[cache_way][cache_set].tag = tag;
 					data_cache[cache_way][cache_set].set = set;
 					data_cache[cache_way][cache_set].MESI = 'S';
-					data_LRU_update(cache_way,cache_set);
 					data_cache[cache_way][cache_set].address = addr;
+					data_LRU_update(cache_way,cache_set);
 					break;
 					
 				case 'I' :
 					data_cache[cache_way][cache_set].tag = tag;
 					data_cache[cache_way][cache_set].set = set;
 					data_cache[cache_way][cache_set].MESI = 'S';
-					data_LRU_update(cache_way,cache_set);
 					data_cache[cache_way][cache_set].address = addr;
+					data_LRU_update(cache_way,cache_set);
 					break;
 			}
 		}
@@ -296,8 +295,119 @@ int main(int argc, char** argv) {
 	return 0;
  }
  
+/* L1 Cache Write function
+ * This function will attempt to write an address from the cache
+ * On a cache miss, the LRU member is evicted if the cache is a miss
+ *
+ * Input: Address to read from the cache
+ * Output: pass = 0, fail != 0
+ */
+ 
 int cache_write(unsigned int addr) {
 	
+	unsigned int tag = addr >> (BYTE + SET);		// tag = address >> (byte + set)
+ 	unsigned int set = (addr & SETMASK) >> BYTE;	// set = (address & setmask) >> byte
+ 	int cache_way = -1;								// Cache way in the cache set
+ 	int cache_set = -1;
+ 	
+ 	stats.data_cache_write++;
+ 	
+ 	// Checkf  for an empty set in the cache line
+	for (int i = 0; cache_way < 0 && i < 8; ++i) {
+ 		for (int k = 0; k < 16384; ++k) {
+ 			// Check for an empty set
+ 			if (data_cache[i][k].tag == 0) {
+ 				cache_way = i;
+			}
+		}
+	}
+	if (cache_way >= 0 && cache_set >= 0) {
+		data_cache[cache_way][cache_set].tag = tag;
+		data_cache[cache_way][cache_set].set = set;
+		data_cache[cache_way][cache_set].MESI = 'M';
+		data_cache[cache_way][cache_set].address = addr;
+		stats.data_cache_miss++;
+		// LRU Data Update
+		data_LRU_update(cache_way,cache_set);
+	}
+	else {
+		data_tag_match(tag, cache_way, cache_set);	// Search for a missing tag
+		
+		if (cache_way < 0 || cache_set < 0)	{		// Miss
+			stats.data_cache_miss++;
+			// Check for a line with an invalid state to evict
+			// Checking for invalid MESI data
+			for (int j = 0; j < 8; ++j) {
+				for (int l = 0; l < 16384; ++l) {
+					if(data_cache[j][l].MESI == 'I') {
+						cache_way = j;
+						cache_set = l;
+					}
+					else {
+						cache_way = -1;
+						cache_set = -1;
+					}
+				}
+			}
+			if (cache_way < 0 || cache_set < 0) {
+				data_LRU_search(cache_way, cache_set);
+				if (cache_way >=0 && cache_set >=0) {
+					data_cache[cache_way][cache_set].tag = tag;
+					data_cache[cache_way][cache_set].set = set;
+					data_cache[cache_way][cache_set].MESI = 'M';
+					data_cache[cache_way][cache_set].address = addr;
+					data_LRU_update(cache_way,cache_set);
+				}
+				else {
+					cout << "LRU data is invalid" << endl;
+					return -1;
+				}
+			}
+			else { 								// Else, the invalid member is evicted
+				data_cache[cache_way][cache_set].tag = tag;
+				data_cache[cache_way][cache_set].set = set;
+				data_cache[cache_way][cache_set].MESI = 'M';
+				data_cache[cache_way][cache_set].address = addr;
+				data_LRU_update(cache_way,cache_set);
+			}
+		}
+		else {									// Data Hit
+			stats.data_cache_hit++;
+			switch (data_cache[cache_way][cache_set].MESI) {
+				case 'M' :
+					data_cache[cache_way][cache_set].tag = tag;
+					data_cache[cache_way][cache_set].set = set;
+					data_cache[cache_way][cache_set].MESI = 'M';
+					data_cache[cache_way][cache_set].address = addr;
+					data_LRU_update(cache_way,cache_set);
+					break;
+				
+				case 'E' :
+					data_cache[cache_way][cache_set].tag = tag;
+					data_cache[cache_way][cache_set].set = set;
+					data_cache[cache_way][cache_set].MESI = 'M';
+					data_cache[cache_way][cache_set].address = addr;
+					data_LRU_update(cache_way,cache_set);
+					break;
+				
+				case 'S' :
+					data_cache[cache_way][cache_set].tag = tag;
+					data_cache[cache_way][cache_set].set = set;
+					data_cache[cache_way][cache_set].MESI = 'E';
+					data_cache[cache_way][cache_set].address = addr;
+					data_LRU_update(cache_way,cache_set);
+					break;
+					
+				case 'I' :
+					data_cache[cache_way][cache_set].tag = tag;
+					data_cache[cache_way][cache_set].set = set;
+					data_cache[cache_way][cache_set].MESI = 'E';
+					data_cache[cache_way][cache_set].address = addr;
+					data_LRU_update(cache_way,cache_set);
+					break;
+			}
+		}
+	}
 }
 
 int instruction_fetch(unsigned int addr) {
