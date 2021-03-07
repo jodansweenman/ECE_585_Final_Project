@@ -249,7 +249,7 @@ int main(int argc, char** argv) {
 				
 				case 'E' :
 					data_cache[cache_way].tag = tag;
-					data_cache[cache_way].MESI = 'E';
+					data_cache[cache_way].MESI = 'S';
 					data_LRU_update(cache_way);
 					data_cache[cache_way].address = addr;
 					break;
@@ -354,6 +354,7 @@ int snooping(unsigned int addr) {
 			}
 		}
 	}
+	return 0;
 	
 }
  
@@ -406,11 +407,11 @@ void data_LRU_update(unsigned int cache_way){
 	int LRU_current = data_cache[cache_way].LRU;
 	
 	for (int i = 0; i < 8; ++i) {
-		if (data_cache[i].LRU <= LRU_current) {
-			data_cache[i].LRU++;
+		if (data_cache[i].LRU >= LRU_current) {
+			data_cache[i].LRU--;
 		}
 	}
-	data_cache[cache_way].LRU = 0;
+	data_cache[cache_way].LRU = 7;
 }
 
 void instruction_LRU_update(unsigned int cache_way){
