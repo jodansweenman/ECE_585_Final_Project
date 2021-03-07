@@ -3,7 +3,14 @@
 #include <string>
 #include <sstream>
 
+#define BYTE 6
+#define SET 14
+#define TAG 12
+#define BYTEMASK 0x0000003F
+#define SETMASK 0x000FFFFF
+
 using namespace std;
+
 
 enum Ops {
 	READ = 0,									// L1 cache read
@@ -18,6 +25,7 @@ enum Ops {
 class Cache {
 	public:
 		unsigned int tag;						// Tag bits
+		unsigned int set;						// Set bits
 		unsigned int LRU;						// LRU bits
 		char MESI;								// MESI bits
 		unsigned char data[64];					// 64 bytes of data
@@ -49,16 +57,16 @@ int snooping(unsigned int addr);
 void reset_cache();
 void print_cache();
 int file_parser(char *filename);
-int data_tag_match(unsigned int tag);
+void data_tag_match(unsigned int tag, int & way, int & set);
 int instruction_tag_match(unsigned int tag);
-int data_LRU_search();
+void data_LRU_search(int & way, int &set);
 int instruction_LRU_search();
-void data_LRU_update(unsigned int cache_way);
+void data_LRU_update(unsigned int cache_way, unsigned int cache_set);
 void instruction_LRU_update(unsigned int cache_way);
 
 // Instantiation of data and instruction caches
-Cache data_cache[8];
-Cache instruction_cache[4];
+Cache data_cache[8][16384];
+Cache instruction_cache[4][16384];
 
 // Instantiation of stats tracker
 Cache_stats stats;
@@ -180,50 +188,60 @@ int main(int argc, char** argv) {
  
  int cache_read(unsigned int addr) {
  	
- 	unsigned int tag = addr >> (6 + 14);		// tag = address >> (byte + set), where our byte amount is 6 bits and the set is 14
- 	int cache_way = -1;							// Cache way in the cache set
+ 	unsigned int tag = addr >> (BYTE + SET);		// tag = address >> (byte + set)
+ 	unsigned int set = (addr & SETMASK) >> BYTE;	// set = (address & setmask) >> byte
+ 	int cache_way = -1;								// Cache way in the cache set
+ 	int cache_set = -1;
  	
  	// Check for an empty set in the cache line
  	for (int i = 0; cache_way < 0 && i < 8; ++i) {
- 		// Check for an empty set
- 		if (data_cache[i].tag == 0) {
- 			cache_way = i;
+ 		for (int k = 0; k < 16384; ++k) {
+ 			// Check for an empty set
+ 			if (data_cache[i][k].tag == 0) {
+ 				cache_way = i;
+			}
 		}
 	}
 	
 	// Check for empty space and place if empty
 	if (cache_way >=0) {
-		data_cache[cache_way].tag = tag;
-		data_cache[cache_way].MESI = 'E';
+		data_cache[cache_way][cache_set].tag = tag;
+		data_cache[cache_way][cache_set].set = set;
+		data_cache[cache_way][cache_set].MESI = 'E';
 		// LRU Data Update
-		data_LRU_update(cache_way);
-		data_cache[cache_way].LRU = 0;
-		data_cache[cache_way].address = addr;
+		data_LRU_update(cache_way,cache_set);
+		data_cache[cache_way][cache_set].LRU = 0;
+		data_cache[cache_way][cache_set].address = addr;
 		stats.data_cache_miss++;
 	}
 	// If no gap search for hit/miss
 	else {
-		cache_way = data_tag_match(tag);				// Search for a missing tag
+		data_tag_match(tag, cache_way, cache_set);	// Search for a missing tag
 		
-		if (cache_way < 0)	{						// Miss
+		if (cache_way < 0 || cache_set < 0)	{		// Miss
 			stats.data_cache_miss++;
 			// Check for a line with an invalid state to evict
 			// Checking for invalid MESI data
 			for (int j = 0; j < 8; ++j) {
-				if(data_cache[j].MESI == 'I') {
-					cache_way = j;
-				}
-				else {
-					cache_way = -1;
+				for (int l = 0; l < 16384; ++l) {
+					if(data_cache[j][l].MESI == 'I') {
+						cache_way = j;
+						cache_set = l;
+					}
+					else {
+						cache_way = -1;
+						cache_set = -1;
+					}
 				}
 			}
-			if (cache_way < 0) {
-				cache_way = data_LRU_search();
-				if (cache_way >=0) {
-					data_cache[cache_way].tag = tag;
-					data_cache[cache_way].MESI = 'E';
-					data_LRU_update(cache_way);
-					data_cache[cache_way].address = addr;
+			if (cache_way < 0 || cache_set < 0) {
+				data_LRU_search(cache_way, cache_set);
+				if (cache_way >=0 && cache_set >=0) {
+					data_cache[cache_way][cache_set].tag = tag;
+					data_cache[cache_way][cache_set].set = set;
+					data_cache[cache_way][cache_set].MESI = 'E';
+					data_LRU_update(cache_way,cache_set);
+					data_cache[cache_way][cache_set].address = addr;
 				}
 				else {
 					cout << "LRU data is invalid" << endl;
@@ -231,41 +249,46 @@ int main(int argc, char** argv) {
 				}
 			}
 			else { 								// Else, the invalid member is evicted
-				data_cache[cache_way].tag = tag;
-				data_cache[cache_way].MESI = 'E';
-				data_LRU_update(cache_way);
-				data_cache[cache_way].address = addr;
+				data_cache[cache_way][cache_set].tag = tag;
+				data_cache[cache_way][cache_set].set = set;
+				data_cache[cache_way][cache_set].MESI = 'E';
+				data_LRU_update(cache_way,cache_set);
+				data_cache[cache_way][cache_set].address = addr;
 			}
 		}
 		else {									// Data Hit
 			stats.data_cache_hit++;
-			switch (data_cache[cache_way].MESI) {
+			switch (data_cache[cache_way][cache_set].MESI) {
 				case 'M' :
-					data_cache[cache_way].tag = tag;
-					data_cache[cache_way].MESI = 'M';
-					data_LRU_update(cache_way);
-					data_cache[cache_way].address = addr;
+					data_cache[cache_way][cache_set].tag = tag;
+					data_cache[cache_way][cache_set].set = set;
+					data_cache[cache_way][cache_set].MESI = 'M';
+					data_LRU_update(cache_way,cache_set);
+					data_cache[cache_way][cache_set].address = addr;
 					break;
 				
 				case 'E' :
-					data_cache[cache_way].tag = tag;
-					data_cache[cache_way].MESI = 'S';
-					data_LRU_update(cache_way);
-					data_cache[cache_way].address = addr;
+					data_cache[cache_way][cache_set].tag = tag;
+					data_cache[cache_way][cache_set].set = set;
+					data_cache[cache_way][cache_set].MESI = 'S';
+					data_LRU_update(cache_way,cache_set);
+					data_cache[cache_way][cache_set].address = addr;
 					break;
 				
 				case 'S' :
-					data_cache[cache_way].tag = tag;
-					data_cache[cache_way].MESI = 'S';
-					data_LRU_update(cache_way);
-					data_cache[cache_way].address = addr;
+					data_cache[cache_way][cache_set].tag = tag;
+					data_cache[cache_way][cache_set].set = set;
+					data_cache[cache_way][cache_set].MESI = 'S';
+					data_LRU_update(cache_way,cache_set);
+					data_cache[cache_way][cache_set].address = addr;
 					break;
 					
 				case 'I' :
-					data_cache[cache_way].tag = tag;
-					data_cache[cache_way].MESI = 'S';
-					data_LRU_update(cache_way);
-					data_cache[cache_way].address = addr;
+					data_cache[cache_way][cache_set].tag = tag;
+					data_cache[cache_way][cache_set].set = set;
+					data_cache[cache_way][cache_set].MESI = 'S';
+					data_LRU_update(cache_way,cache_set);
+					data_cache[cache_way][cache_set].address = addr;
 					break;
 			}
 		}
@@ -290,31 +313,34 @@ int instruction_fetch(unsigned int addr) {
  */
 int invalidate_command(unsigned int addr) {
 	
-	unsigned int tag = addr >> (6 + 14); 		// tag = address >> (byte + set), where our byte amount is 6 bits and the set is 14
+	unsigned int tag = addr >> (BYTE + SET);		// tag = address >> (byte + set)
+	
 	
 	// Search data cache for a matching tag
 	for (int i = 0; i < 8; ++i) {
-		if (data_cache[i].tag == tag) {
-			switch (data_cache[i].MESI) {
-				case 'M':
-					data_cache[i].MESI = 'I';	// Change MESI bit to Invalid
-					break;
-					
-				case 'E':
-					data_cache[i].MESI = 'I';	// Change MESI bit to Invalid
-					break;
-					
-				case 'S':
-					data_cache[i].MESI = 'I';	// Change MESI bit to Invalid
-					break;
-					
-				case 'I':
-					return 0;					// Do nothing as state is already invalid
-					
-				default:
-					return -1;					// Non-MESI state recorded. ERROR
+		for (int j = 0; j < 16384; ++j) {
+			if (data_cache[i][j].tag == tag) {
+				switch (data_cache[i][j].MESI) {
+					case 'M':
+						data_cache[i][j].MESI = 'I';	// Change MESI bit to Invalid
+						break;
+						
+					case 'E':
+						data_cache[i][j].MESI = 'I';	// Change MESI bit to Invalid
+						break;
+						
+					case 'S':
+						data_cache[i][j].MESI = 'I';	// Change MESI bit to Invalid
+						break;
+						
+					case 'I':
+						return 0;					// Do nothing as state is already invalid
+						
+					default:
+						return -1;					// Non-MESI state recorded. ERROR
+				}
 			}
-		}
+		}	
 	}
 	return 0;	
 }
@@ -329,30 +355,33 @@ int invalidate_command(unsigned int addr) {
  */
 int snooping(unsigned int addr) {
 	
-	unsigned int tag = addr >> (6 + 14); 		// tag = address >> (byte + set), where our byte amount is 6 bits and the set is 14
+	unsigned int tag = addr >> (BYTE + SET);		// tag = address >> (byte + set)
 	
+	// Search data cache for a matching tag
 	for (int i = 0; i < 8; ++i) {
-		if(data_cache[i].tag == tag) {
-			switch (data_cache[i].MESI) {
-				case 'M' :
-					data_cache[i].MESI = 'I';	// Changes the MESI bit to Invalid
-					break;
-				
-				case 'E' :
-					data_cache[i].MESI = 'I';	// Changes the MESI bit to Invalid
-					break;
-				
-				case 'S' :
-					data_cache[i].MESI = 'I';	// Changes the MESI bit to Invalid
-					break;
-				
-				case 'I' :
-					return 0;					// Do nothing as state is already invalid
-				
-				default :
-					return -1;					// Non-MESI state recorded. ERROR
+		for (int j = 0; j < 16384; ++j) {
+			if (data_cache[i][j].tag == tag) {
+				switch (data_cache[i][j].MESI) {
+					case 'M':
+						data_cache[i][j].MESI = 'I';	// Change MESI bit to Invalid
+						break;
+						
+					case 'E':
+						data_cache[i][j].MESI = 'I';	// Change MESI bit to Invalid
+						break;
+						
+					case 'S':
+						data_cache[i][j].MESI = 'I';	// Change MESI bit to Invalid
+						break;
+						
+					case 'I':
+						return 0;					// Do nothing as state is already invalid
+						
+					default:
+						return -1;					// Non-MESI state recorded. ERROR
+				}
 			}
-		}
+		}	
 	}
 	return 0;
 	
@@ -371,16 +400,22 @@ int snooping(unsigned int addr) {
 	 
 	 // Clearing the data cache
 	 for (int i = 0; i < 8; ++i) {
-	 	data_cache[i].tag = 0;
-	 	data_cache[i].LRU = 0;
-	 	data_cache[i].MESI = 'I';
+	 	for (int j = 0; j < 16384; ++j) {
+			data_cache[i][j].tag = 0;
+		 	data_cache[i][j].set = 0;
+			data_cache[i][j].LRU = 0;
+		 	data_cache[i][j].MESI = 'I';
+		 }
 	 }
 	 
 	 // Clearing the instruction cache
-	 for (int j = 0; j < 4; ++j) {
-	 	instruction_cache[j].tag = 0;
-	 	instruction_cache[j].LRU = 0;
-	 	instruction_cache[j].MESI = 'I';
+	 for (int k = 0; k < 4; ++k) {
+	 	for (int l = 0; l < 16384; ++l) {
+	 		instruction_cache[k][l].tag = 0;
+	 		instruction_cache[k][l].set = 0;
+	 		instruction_cache[k][l].LRU = 0;
+	 		instruction_cache[k][l].MESI = 'I';
+		 }
 	 }
 	 
 	 // Resetting all stats for data cache
@@ -403,44 +438,60 @@ void print_cache() {
 	
 }
 
-void data_LRU_update(unsigned int cache_way){
-	int LRU_current = data_cache[cache_way].LRU;
+void data_LRU_update(unsigned int cache_way, unsigned int cache_set) {
+	int LRU_current = data_cache[cache_way][cache_set].LRU;
 	
 	for (int i = 0; i < 8; ++i) {
-		if (data_cache[i].LRU >= LRU_current) {
-			data_cache[i].LRU--;
+		for(int j = 0; j < 16384; ++j) {
+			if (data_cache[i][j].LRU >= LRU_current) {
+				data_cache[i][j].LRU--;
+			}	
 		}
 	}
-	data_cache[cache_way].LRU = 7;
+	data_cache[cache_way][cache_set].LRU = 0x7;
 }
 
-void instruction_LRU_update(unsigned int cache_way){
+void instruction_LRU_update(unsigned int cache_way) {
 	
 }
 
-int data_tag_match(unsigned int tag) {
+void data_tag_match(unsigned int tag, int & way, int & set) {
 	
-	int i =0;
+	int i = 0;
+	int j = 0;
+	int way_temp = -1;
+	int set_temp = -1;
 	// Check for matching tags;
-	while (data_cache[i].tag != tag) {
+	while (data_cache[i][j].tag != tag) {
 		i++;
-		if (i > 7) {
-			return -1;
+		j++;
+		way_temp = i;
+		set_temp = j;
+		if (i > 7 || j > 16383) {
+			way_temp = - 1;
+			set_temp = - 1;
 		}
 	}
-	return i;
+	way = way_temp;
+	set = set_temp;
 	
 }
 int instruction_tag_match(unsigned int tag) {
 	
 }
-int data_LRU_search() {
-	for (int i =0; i < 8; ++i) {
-		if (data_cache[i].LRU = 0x7) {
-			return i;
+void data_LRU_search(int & way, int &set) {
+	int way_temp = -1;
+	int set_temp = -1;
+	for (int i = 0; i < 8; ++i) {
+		for(int j = 0; j < 16384; ++j) {
+			if (data_cache[i][j].LRU == 0) {
+				way_temp = i;
+				set_temp = j;
+			}
 		}
 	}
-	return -1;
+	way = way_temp;
+	set = set_temp;
 }
 int instruction_LRU_search() {
 	
