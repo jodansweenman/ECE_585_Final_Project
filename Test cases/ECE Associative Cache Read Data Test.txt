@@ -4,7 +4,7 @@
 
 
 #READING INSTRUCTION CACH TESTS
-#Fill up A SetC 0000 0000 0001 00. Each Way should Miss then Hit
+#Fill up A SetC 0000 0000 0001 00. Each Way should Miss then Hit.  The Hit should also turn them from Exclusive to Share
 #Way1
 0	F000 0100
 0	F000 0101
@@ -30,7 +30,7 @@
 0	F070 010E
 0	F070 010F
 
-#Fill up A SetD 0000 0000 0011 00. Each Way should Miss then Hit
+#Fill up A SetD 0000 0000 0011 00. Each Way should Miss then Hit.  The Hit should also turn them
 #Way1
 0	F000 0300
 0	F000 0301

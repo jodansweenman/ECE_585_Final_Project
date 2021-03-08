@@ -16,7 +16,7 @@
 3	0020 0240
 3	0030 0340
 
-# Check that lines elements of set are hits
+# Check that lines elements of set are hits and turn them from Exclusive to Share
 3	0000 0040
 3	0010 0140
 3	0020 0240
@@ -28,6 +28,7 @@
 3	0020 0244
 3	0030 0348
 
+# The set of 4 commands should have just set those lines to Invalid
 
 #Make sure that a different Set can be filled with different tags. This should not influence previous Set
 #Fill up SetB  
@@ -36,11 +37,14 @@
 3	0041 0040
 3	0081 0040
 3	00C1 0040
-# Check that lines elements of set are hits
+
+
+# Check that lines elements of set are hits and turn them from Exclusive to Share
 3	0001 0040
 3	0041 0040
 3	0081 0040
 3	00C1 0040
+
 # Check that lines of set are hits with different Bit offsets
 3	0001 004F
 3	0041 004E
@@ -79,51 +83,3 @@
 3	0020 0240
 3	0030 0340
 
-#READING INSTRUCTION CACH TESTS
-#Fill up A SetC 0000 0000 0001 00.
-#Way1
-0	1111 0000 0000		0000 0000 0001 00	00 0000 			#Should be Miss	
-0	1111 0000 0000		0000 0000 0001 00	00 0001				#Should be Hit
-#Way2
-0	1111 0000 0001		0000 0000 0001 00	00 0010 #Should be Miss	
-0	1111 0000 0001		0000 0000 0001 00	00 0011	# Should be Hit
-#Way3
-0	1111 0000 0010		0000 0000 0001 00	00 0100 #Should be Miss	
-0	1111 0000 0010		0000 0000 0001 00	00 0101	# Should be Hit
-#Way4
-0	1111 0000 0011		0000 0000 0001 00	00 0110 #Should be Miss	
-0	1111 0000 0011		0000 0000 0001 00	00 0111	# Should be Hit
-#Way5
-0	1111 0000 0100		0000 0000 0001 00	00 1000 #Should be Miss	
-0	1111 0000 0100		0000 0000 0001 00	00 1001	# Should be Hit
-#Way6
-0	1111 0000 0101		0000 0000 0001 00	00 1010 #Should be Miss	
-0	1111 0000 0101		0000 0000 0001 00	00 1011	# Should be Hit
-#Way7
-0	1111 0000 0110		0000 0000 0001 00	00 1100 #Should be Miss	
-0	1111 0000 0110		0000 0000 0001 00	00 1101	# Should be Hit
-#Way8
-0	1111 0000 0111		0000 0000 0001 00	00 1110 #Should be Miss	
-0	1111 0000 0111		0000 0000 0001 00	00 1111	# Should be Hit
-
-# Test that Tags Filled in SetC were not filled in SetD
-#Way1
-0	1111 0000 0000		0000 0000 0011 00	00 0000 #Should be Miss	
-#Way2
-0	1111 0000 0001		0000 0000 0011 00	00 0010 #Should be Miss	
-#Way3
-0	1111 0000 0010		0000 0000 0011 00	00 0100 #Should be Miss	
-#Way4
-0	1111 0000 0011		0000 0000 0011 00	00 0110 #Should be Miss	
-#Way5
-0	1111 0000 0100		0000 0000 0011 00	00 1000 #Should be Miss	
-#Way6
-0	1111 0000 0101		0000 0000 0011 00	00 1010 #Should be Miss	
-#Way7
-0	1111 0000 0110		0000 0000 0011 00	00 1100 #Should be Miss	
-#Way8
-0	1111 0000 0111		0000 0000 0011 00	00 1110 #Should be Miss	
-
-#Print Caches
-9	0000 0000 0000		0000 0000 0001 00	00 0000 #Check Value
-9
