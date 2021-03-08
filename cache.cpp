@@ -771,7 +771,7 @@ void print_cache() {
 	}
 	
 	if(stats.inst_cache_miss == 0) {
-		cout << "No Data Cache Transactions Occured" << endl;
+		cout << "No Instruction Cache Transactions Occured" << endl;
 	}
 	else {
 		cout << "\nINSTRUCTION CACHE:" << endl;
