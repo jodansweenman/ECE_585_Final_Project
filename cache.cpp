@@ -1,3 +1,19 @@
+/**************************************************************************************
+* cache.cpp
+*
+* Authors: Josiah Sweeney, Melinda Van, Nguyen
+*
+*
+*
+*
+*
+*
+
+***************************************************************************************/
+
+
+
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -63,8 +79,8 @@ int data_tag_match(unsigned int tag, unsigned int set);
 int instruction_tag_match(unsigned int tag, unsigned int set);
 int data_LRU_search(int set);
 int instruction_LRU_search(int set);
-void data_LRU_update(unsigned int cache_way, unsigned int cache_set);
-void instruction_LRU_update(unsigned int cache_way, unsigned int cache_set);
+void data_LRU_update(unsigned int cache_way, unsigned int cache_set, unsigned int flag);
+void instruction_LRU_update(unsigned int cache_way, unsigned int cache_set, unsigned int flag);
 
 // Instantiation of data and instruction caches
 Cache data_cache[8][16384];
@@ -202,6 +218,7 @@ int main(int argc, char** argv) {
  	
  	unsigned int tag = addr >> (BYTE + SET);			// tag = address >> (byte + set)
  	unsigned int set = (addr & SETMASK) >> BYTE;		// set = (address & setmask) >> byte
+ 	unsigned int empty_cache = 0;						// Flag for empty cache
  	int cache_way = -1;									// Cache way in the cache set
  	
  	stats.data_cache_read++;
@@ -221,7 +238,7 @@ int main(int argc, char** argv) {
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'M';
 				data_cache[cache_way][set].address = addr;
-				data_LRU_update(cache_way,set);
+				data_LRU_update(cache_way,set,empty_cache);
 				break;
 			
 			case 'E' :
@@ -229,7 +246,7 @@ int main(int argc, char** argv) {
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'S';
 				data_cache[cache_way][set].address = addr;
-				data_LRU_update(cache_way,set);
+				data_LRU_update(cache_way,set,empty_cache);
 				break;
 			
 			case 'S' :
@@ -237,7 +254,7 @@ int main(int argc, char** argv) {
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'S';
 				data_cache[cache_way][set].address = addr;
-				data_LRU_update(cache_way,set);
+				data_LRU_update(cache_way,set,empty_cache);
 				break;
 				
 			case 'I' :
@@ -245,7 +262,7 @@ int main(int argc, char** argv) {
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'S';
 				data_cache[cache_way][set].address = addr;
-				data_LRU_update(cache_way,set);
+				data_LRU_update(cache_way,set,empty_cache);
 				break;
 		}
 	}
@@ -261,6 +278,7 @@ int main(int argc, char** argv) {
  		for (int i = 0; cache_way < 0 && i < 8; ++i) {
  			if (data_cache[i][set].tag == 0) {
  				cache_way = i;
+ 				empty_cache = 1;
 			}
 		}
 		
@@ -271,7 +289,7 @@ int main(int argc, char** argv) {
 			data_cache[cache_way][set].MESI = 'E';
 			data_cache[cache_way][set].address = addr;
 			// LRU Data Update
-			data_LRU_update(cache_way,set);
+			data_LRU_update(cache_way,set,empty_cache);
 		}
 		else {
 			// Check for a line with invalid MESI data to evict
@@ -291,7 +309,7 @@ int main(int argc, char** argv) {
 					data_cache[cache_way][set].set = set;
 					data_cache[cache_way][set].MESI = 'E';
 					data_cache[cache_way][set].address = addr;
-					data_LRU_update(cache_way,set);
+					data_LRU_update(cache_way,set,empty_cache);
 				}
 				else {
 					cout << "LRU data is invalid" << endl;
@@ -303,7 +321,7 @@ int main(int argc, char** argv) {
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'E';
 				data_cache[cache_way][set].address = addr;
-				data_LRU_update(cache_way,set);
+				data_LRU_update(cache_way,set,empty_cache);
 			}
 			
 		}	
@@ -322,6 +340,7 @@ int cache_write(unsigned int addr) {
 	
 	unsigned int tag = addr >> (BYTE + SET);			// tag = address >> (byte + set)
  	unsigned int set = (addr & SETMASK) >> BYTE;		// set = (address & setmask) >> byte
+ 	unsigned int empty_cache = 0;						// Flag for empty cache
  	int cache_way = -1;									// Cache way in the cache set
  	
  	stats.data_cache_write++;
@@ -344,7 +363,7 @@ int cache_write(unsigned int addr) {
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'M';
 				data_cache[cache_way][set].address = addr;
-				data_LRU_update(cache_way,set);
+				data_LRU_update(cache_way,set,empty_cache);
 				break;
 			
 			case 'E' :
@@ -352,7 +371,7 @@ int cache_write(unsigned int addr) {
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'M';
 				data_cache[cache_way][set].address = addr;
-				data_LRU_update(cache_way,set);
+				data_LRU_update(cache_way,set,empty_cache);
 				break;
 			
 			case 'S' :
@@ -360,7 +379,7 @@ int cache_write(unsigned int addr) {
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'E';
 				data_cache[cache_way][set].address = addr;
-				data_LRU_update(cache_way,set);
+				data_LRU_update(cache_way,set,empty_cache);
 				break;
 				
 			case 'I' :
@@ -368,7 +387,7 @@ int cache_write(unsigned int addr) {
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'E';
 				data_cache[cache_way][set].address = addr;
-				data_LRU_update(cache_way,set);
+				data_LRU_update(cache_way,set,empty_cache);
 				break;
 		}
 	}
@@ -384,6 +403,7 @@ int cache_write(unsigned int addr) {
  		for (int i = 0; cache_way < 0 && i < 8; ++i) {
  			if (data_cache[i][set].tag == 0) {
  				cache_way = i;
+ 				empty_cache = 1;
 			}
 		}
 		
@@ -394,7 +414,7 @@ int cache_write(unsigned int addr) {
 			data_cache[cache_way][set].MESI = 'M';
 			data_cache[cache_way][set].address = addr;
 			// LRU Data Update
-			data_LRU_update(cache_way,set);
+			data_LRU_update(cache_way,set,empty_cache);
 		}
 		else {
 			// Simulate L2 Cache RFO message
@@ -419,7 +439,7 @@ int cache_write(unsigned int addr) {
 					data_cache[cache_way][set].set = set;
 					data_cache[cache_way][set].MESI = 'M';
 					data_cache[cache_way][set].address = addr;
-					data_LRU_update(cache_way,set);
+					data_LRU_update(cache_way,set,empty_cache);
 				}
 				else {
 					cout << "LRU data is invalid" << endl;
@@ -431,7 +451,7 @@ int cache_write(unsigned int addr) {
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'M';
 				data_cache[cache_way][set].address = addr;
-				data_LRU_update(cache_way,set);
+				data_LRU_update(cache_way,set,empty_cache);
 			}
 			
 		}	
@@ -451,6 +471,7 @@ int instruction_fetch(unsigned int addr) {
 	
 	unsigned int tag = addr >> (BYTE + SET);			// tag = address >> (byte + set)
  	unsigned int set = (addr & SETMASK) >> BYTE;		// set = (address & setmask) >> byte
+ 	unsigned int empty_cache = 0;						// Flag for empty cache
  	int cache_way = -1;									// Cache way in the cache set
  	
  	stats.inst_cache_read++;
@@ -471,7 +492,7 @@ int instruction_fetch(unsigned int addr) {
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'M';
 				instruction_cache[cache_way][set].address = addr;
-				instruction_LRU_update(cache_way,set);
+				instruction_LRU_update(cache_way,set,empty_cache);
 				break;
 			
 			case 'E' :
@@ -479,7 +500,7 @@ int instruction_fetch(unsigned int addr) {
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'S';
 				instruction_cache[cache_way][set].address = addr;
-				instruction_LRU_update(cache_way,set);
+				instruction_LRU_update(cache_way,set,empty_cache);
 				break;
 			
 			case 'S' :
@@ -487,7 +508,7 @@ int instruction_fetch(unsigned int addr) {
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'S';
 				instruction_cache[cache_way][set].address = addr;
-				instruction_LRU_update(cache_way,set);
+				instruction_LRU_update(cache_way,set,empty_cache);
 				break;
 				
 			case 'I' :
@@ -495,7 +516,7 @@ int instruction_fetch(unsigned int addr) {
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'S';
 				instruction_cache[cache_way][set].address = addr;
-				instruction_LRU_update(cache_way,set);
+				instruction_LRU_update(cache_way,set,empty_cache);
 				break;
 		}
 	}
@@ -510,6 +531,7 @@ int instruction_fetch(unsigned int addr) {
 		for (int i = 0; cache_way < 0 && i < 4; ++i) {
 	 		if (instruction_cache[i][set].tag == 0) {
 				cache_way = i;
+				empty_cache = 1;
 			}
 		}
 		if (cache_way >= 0) {
@@ -518,7 +540,7 @@ int instruction_fetch(unsigned int addr) {
 			instruction_cache[cache_way][set].MESI = 'E';
 			instruction_cache[cache_way][set].address = addr;
 			// LRU instruction Update
-			instruction_LRU_update(cache_way,set);
+			instruction_LRU_update(cache_way,set,empty_cache);
 		}
 		else {
 			// Check for a line with invalid MESI data to evict
@@ -537,7 +559,7 @@ int instruction_fetch(unsigned int addr) {
 					instruction_cache[cache_way][set].set = set;
 					instruction_cache[cache_way][set].MESI = 'E';
 					instruction_cache[cache_way][set].address = addr;
-					instruction_LRU_update(cache_way,set);
+					instruction_LRU_update(cache_way,set,empty_cache);
 				}
 				else {
 					cout << "LRU data is invalid" << endl;
@@ -549,7 +571,7 @@ int instruction_fetch(unsigned int addr) {
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'E';
 				instruction_cache[cache_way][set].address = addr;
-				instruction_LRU_update(cache_way,set);
+				instruction_LRU_update(cache_way,set,empty_cache);
 			}
 		}
 	}
@@ -739,51 +761,94 @@ void print_cache() {
 	
 	// Printing Cache Statistics
 	cout << "\n\n\t\t\tCACHE STATISTICS" << endl;
-	cout << "\nDATA CACHE:" << endl;
-	cout << "Data Cache Hits: " << dec << stats.data_cache_hit << "\nData Cache Misses: " << stats.data_cache_miss << "\nData Cache Hit/Miss Ratio: " 
-		<< stats.data_ratio << "\nData Cache Reads: " << stats.data_cache_read << "\nData Cache Writes: " << stats.data_cache_write << endl;
+	if(stats.data_cache_miss == 0){
+		cout << "No Data Cache Transactions Occured" << endl;
+	}
+	else {
+		cout << "\nDATA CACHE:" << endl;
+		cout << "Data Cache Hits: " << dec << stats.data_cache_hit << "\nData Cache Misses: " << stats.data_cache_miss << "\nData Cache Hit/Miss Ratio: " 
+			<< stats.data_ratio << "\nData Cache Reads: " << stats.data_cache_read << "\nData Cache Writes: " << stats.data_cache_write << endl;
+	}
 	
-	cout << "\nINSTRUCTION CACHE:" << endl;
-	cout << "Instruction Cache Hits: " << stats.inst_cache_hit << "\nInstruction Cache Misses: " << stats.inst_cache_miss << "\nInstruction Cache Hit/Miss Ratio: " 
-		<< stats.inst_ratio << "\nInstruction Cache Reads: " << stats.inst_cache_read << endl;
+	if(stats.inst_cache_miss == 0) {
+		cout << "No Data Cache Transactions Occured" << endl;
+	}
+	else {
+		cout << "\nINSTRUCTION CACHE:" << endl;
+		cout << "Instruction Cache Hits: " << stats.inst_cache_hit << "\nInstruction Cache Misses: " << stats.inst_cache_miss << "\nInstruction Cache Hit/Miss Ratio: " 
+			<< stats.inst_ratio << "\nInstruction Cache Reads: " << stats.inst_cache_read << endl;
+	}		
 }
 
 /* Data Cache LRU Update function
  * This function updates the data cache LRU
  *
- * Input: cache_way and cache_set values
- * Output: Void
+ * Input: cache_way and cache_set values, flag for whether there is empty space in the cache
+ * Output: Void. Updates LRU values for a given set in the global data cache class
  */
-void data_LRU_update(unsigned int cache_way, unsigned int cache_set) {
+void data_LRU_update(unsigned int cache_way, unsigned int cache_set, unsigned int flag) {
 	int LRU_current = data_cache[cache_way][cache_set].LRU;
-	
-	if (LRU_current < 0x7){
-		for (int i = 0; i < 8; ++i) {
-			if (data_cache[i][cache_set].LRU > 0) {
-				data_cache[i][cache_set].LRU--;
-			}	
+
+	if(LRU_current == 0x0){
+		if(flag == 1){
+			for (int i = 0; i < cache_way; ++i){
+				--data_cache[i][cache_set].LRU;
+			}
 		}
-		data_cache[cache_way][cache_set].LRU = 0x7;	
+		else {
+			for (int i = 0; i < 8; ++i){
+				--data_cache[i][cache_set].LRU;
+			}
+		}
 	}
+	else {
+		for (int i = 0; i < 8; ++i) {
+			if(LRU_current > data_cache[i][cache_set].LRU) {
+				data_cache[i][cache_set].LRU = data_cache[i][cache_set].LRU;
+			}
+			else
+			{
+				--data_cache[i][cache_set].LRU;
+			}
+		}
+	}
+	data_cache[cache_way][cache_set].LRU = 0x7;
 }
 
 /* Instruction Cache LRU Update function
  * This function updates the data cache LRU
  *
- * Input: cache_way and cache_set values
- * Output: Void
+ * Input: cache_way and cache_set values, flag for whether there is empty space in the cache
+ * Output: Void. Updates LRU values for a given set in the global instruction cache class
  */
-void instruction_LRU_update(unsigned int cache_way, unsigned int cache_set) {
+void instruction_LRU_update(unsigned int cache_way, unsigned int cache_set, unsigned int flag) {
 	int LRU_current = instruction_cache[cache_way][cache_set].LRU;
 	
-	if (LRU_current < 0x3){
-		for (int i = 0; i < 4; ++i) {
-			if (instruction_cache[i][cache_set].LRU > 0) {
-				instruction_cache[i][cache_set].LRU--;
+	if(LRU_current == 0x0){
+		if(flag == 1){
+			for (int i = 0; i < cache_way; ++i){
+				--instruction_cache[i][cache_set].LRU;
 			}
 		}
-		instruction_cache[cache_way][cache_set].LRU = 0x3;
+		else {
+			for (int i = 0; i < 4; ++i){
+				--instruction_cache[i][cache_set].LRU;
+			}
+		}
 	}
+	
+	else {
+		for (int i = 0; i < 4; ++i) {
+			if(LRU_current >= instruction_cache[i][cache_set].LRU) {
+				instruction_cache[i][cache_set].LRU = instruction_cache[i][cache_set].LRU;
+			}
+			else
+			{
+				--instruction_cache[i][cache_set].LRU;
+			}
+		}
+	}
+	instruction_cache[cache_way][cache_set].LRU = 0x3;
 	
 }
 
