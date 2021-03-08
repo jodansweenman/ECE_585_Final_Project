@@ -13,103 +13,103 @@
 #READING INSTRUCTION CACH TESTS
 
 #Reset
-8 0000 0000
+8 00000000
 
 
 
 #Test Reading a Line and then Writing to it
 #The Line should miss on the Read and then hit on the write
 #Way1
-1 F000 0100
-0 F000 0101
+1 F0000100
+0 F0000101
 #Way2
-1 F010 0102
-0 F010 0103
+1 F0100102
+0 F0100103
 #Way3
-1 F020 0104
-0 F020 0105
+1 F0200104
+0 F0200105
 #Way4
-1 F030 0106
-0 F030 0107
+1 F0300106
+0 F0300107
 #Way5
-1 F040 0108
-0 F040 0109
+1 F0400108
+0 F0400109
 #Way6
 1 F050 010A
 0 F050 010B
 #Way7
-1 F060 010C
-0 F060 010D
+1 F060010C
+0 F060010D
 #Way8
-1 F070 010E
-0 F070 010F
+1 F070010E
+0 F070010F
 
 #Print
-9 0000 0100
+9 00000100
 
 #This Command will Replace Way #1
-1 F080 0100
-0 F080 0101
+1 F0800100
+0 F0800101
 
 #Way1 Should have been replaced by the last command
-9 0000 0100
+9 00000100
 
 #Test Writing a Line and then Reading it
 #The Line should miss on the write and then hit on the read.  The Read will also turn it to a Shared value
 #Way1
-0 F000 0200
-1 F000 0201
+0 F0000200
+1 F0000201
 #Way2
-0 F010 0202
-1 F010 0203
+0 F0100202
+1 F0100203
 #Way3
-0 F020 0204
-1 F020 0205
+0 F0200204
+1 F0200205
 #Way4
-0 F030 0206
-1 F030 0207
+0 F0300206
+1 F0300207
 #Way5
-0 F040 0208
-1 F040 0209
+0 F0400208
+1 F0400209
 #Way6
-0 F050 020A
-1 F050 020B
+0 F050020A
+1 F050020B
 #Way7
-0 F060 020C
-1 F060 020D
+0 F060020C
+1 F060020D
 #Way8
-0 F070 020E
-1 F070 020F
+0 F070020E
+1 F070020F
 
 
-9 0000 0200
+9 00000200
 
 #This Command will Replace Way #1
 #The Line being replaced in Way #1 should write out to Memory before it is replaced
-# F000 0200 Is the line that should be replaced
+# F0000200 Is the line that should be replaced
 
-0 F080 0200
-1 F080 0201
+0 F0800200
+1 F0800201
 
 #Way1 Should have been replaced by the last command
-9 0000 0200
+9 00000200
 
 #Test what happenes if Read is read for a Modified Line
-0 F010 0200
+0 F0100200
 #Test what happenes if Read For Own is read for a Modified Line
-3 F020 0200
-3 F030 0200
+3 F0200200
+3 F0300200
 
 #Test what happenes if Invalidate is read for a Modified Line
-4 F040 0200
-4 F050 0200
+4 F0400200
+4 F0500200
 
 #Print
-9 0000 0200
+9 00000200
 
 #Check if Lines that should have just been invalidated now hit on a Read
-0 F020 0200
-0 F040 0200
+0 F0200200
+0 F0400200
 #Check if Lines that should have just been invalidated now hit on a Write
-1 F030 0200
-1 F050 0200
+1 F0300200
+1 F0500200
