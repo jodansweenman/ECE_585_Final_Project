@@ -6,7 +6,7 @@
 
 
 #RESET
-8	00000000
+8 00000000
 
 #READING INSTRUCTION CACHE TESTS
 #Fill up SetA.  Each Should be a miss
@@ -46,40 +46,40 @@
 3 00C10040
 
 # Check that lines of set are hits with different Bit offsets
-3	0001004F
-3	0041004E
-3	0081004C
-3	00C10048
+3 0001004F
+3 0041004E
+3 0081004C
+3 00C10048
 
 #Check that elements of SetA are still hits and that writing SetB did not interfer with them
-3	00000040
-3	00100040
-3	00200040
-3	00300040
+3 00000040
+3 00100040
+3 00200040
+3 00300040
 
 #Read over SetA
 # In SetA Read over Tag 000 with Tag 010.  This should be a Miss
-3	01000040	
+3 01000040	
 
 # Check that Tag 000 in Set A was written over by reading it.
 # This Reads over Tag 001 with Tag 000.
-3	00000040	
+3 00000040	
 
 # In SetA Read over Tag 002 with Tag 030.  This should be a Miss
-3	03000040
+3 03000040
 
 # Check that Tag 002 in Set A was written over by reading it.
 # This Reads over Tag 003 with Tag 002.
-3	00200040	
+3 00200040	
 
 
 #PRINT INSTRUCTION CACHE TO CHECK IT
-9	00000040	
+9 00000040	
 
 
 #Confirm the State is as expected for SetA.  Everything should be hits
-3	00000040
-3	00100140
-3	00200240
-3	00300340
+3 00000040
+3 00100140
+3 00200240
+3 00300340
 
