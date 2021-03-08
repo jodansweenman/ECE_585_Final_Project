@@ -789,18 +789,13 @@ void print_cache() {
 void data_LRU_update(unsigned int cache_way, unsigned int cache_set, unsigned int flag) {
 	int LRU_current = data_cache[cache_way][cache_set].LRU;
 
-	if(LRU_current == 0x0){
-		if(flag == 1){
-			for (int i = 0; i < cache_way; ++i){
-				--data_cache[i][cache_set].LRU;
-			}
-		}
-		else {
-			for (int i = 0; i < 8; ++i){
-				--data_cache[i][cache_set].LRU;
-			}
+	// If a way is empty, flag = 1
+	if(flag == 1){
+		for (int i = 0; i < cache_way; ++i){
+			--data_cache[i][cache_set].LRU;
 		}
 	}
+	// If a way is NOT empty
 	else {
 		for (int i = 0; i < 8; ++i) {
 			if(LRU_current > data_cache[i][cache_set].LRU) {
@@ -824,19 +819,13 @@ void data_LRU_update(unsigned int cache_way, unsigned int cache_set, unsigned in
 void instruction_LRU_update(unsigned int cache_way, unsigned int cache_set, unsigned int flag) {
 	int LRU_current = instruction_cache[cache_way][cache_set].LRU;
 	
-	if(LRU_current == 0x0){
-		if(flag == 1){
-			for (int i = 0; i < cache_way; ++i){
-				--instruction_cache[i][cache_set].LRU;
-			}
-		}
-		else {
-			for (int i = 0; i < 4; ++i){
-				--instruction_cache[i][cache_set].LRU;
-			}
+	// If a way is empty, flag = 1
+	if(flag == 1){
+		for (int i = 0; i < cache_way; ++i){
+			--instruction_cache[i][cache_set].LRU;
 		}
 	}
-	
+	// If a way is NOT empty
 	else {
 		for (int i = 0; i < 4; ++i) {
 			if(LRU_current >= instruction_cache[i][cache_set].LRU) {
