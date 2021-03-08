@@ -1,0 +1,74 @@
+# Formate 3	0000 0000 0000		0000 0000 0000 01	00 0000		0000 0040
+
+# First 3 hex numbers are Tag, 3.5 hex numbers are index, 1.5 hex numbers are offset
+
+
+#READING INSTRUCTION CACH TESTS
+#Fill up A SetC 0000 0000 0001 00. Each Way should Miss then Hit.  The Hit should also turn them from Exclusive to Share
+#Way1
+0	F000 0100
+0	F000 0101
+#Way2
+0	F010 0102
+0	F010 0103
+#Way3
+0	F020 0104
+0	F020 0105
+#Way4
+0	F030 0106
+0	F030 0107
+#Way5
+0	F040 0108
+0	F040 0109
+#Way6
+0	F050 010A
+0	F050 010B
+#Way7
+0	F060 010C
+0	F060 010D
+#Way8
+0	F070 010E
+0	F070 010F
+
+#Fill up A SetD 0000 0000 0011 00. Each Way should Miss then Hit.  The Hit should also turn them
+#Way1
+0	F000 0300
+0	F000 0301
+#Way2
+0	F010 0302
+0	F010 0303
+#Way3
+0	F020 0304
+0	F020 0305
+#Way4
+0	F030 0306
+0	F030 0307
+#Way5
+0	F040 0308
+0	F040 0309
+#Way6
+0	F050 030A
+0	F050 030B
+#Way7
+0	F060 030C
+0	F060 030D
+#Way8
+0	F070 030E
+0	F070 030F
+
+#Print Caches
+9	0000 0100
+9	0000 0300
+
+
+#This Should hit 
+0	F010 0300
+0	F010 0300
+
+#This should Read over F00
+0	F080 030E
+0	F080 030F
+
+#This should now miss and then hit
+0	F000 030E
+0	F000 030F

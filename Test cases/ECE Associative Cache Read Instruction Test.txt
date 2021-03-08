@@ -1,0 +1,85 @@
+# Formate 3	0000 0000 0000		0000 0000 0000 01	00 0000		0000 0040
+
+# First 3 hex numbers are Tag, 3.5 hex numbers are index, 1.5 hex numbers are offset
+#SetA 0000 0000 0000 01
+#SetB 0001 0000 0000 01.
+
+
+#RESET
+8	0000 0000
+
+#READING INSTRUCTION CACHE TESTS
+#Fill up SetA.  Each Should be a miss
+
+3	0000 0040
+3	0010 0140
+3	0020 0240
+3	0030 0340
+
+# Check that lines elements of set are hits and turn them from Exclusive to Share
+3	0000 0040
+3	0010 0140
+3	0020 0240
+3	0030 0340
+
+# Check that lines of set are hits with different Bit offsets
+3	0000 0041
+3	0010 0142
+3	0020 0244
+3	0030 0348
+
+# The set of 4 commands should have just set those lines to Invalid
+
+#Make sure that a different Set can be filled with different tags. This should not influence previous Set
+#Fill up SetB  
+#Each Should be a miss and should not incluence SetA
+3	0001 0040
+3	0041 0040
+3	0081 0040
+3	00C1 0040
+
+
+# Check that lines elements of set are hits and turn them from Exclusive to Share
+3	0001 0040
+3	0041 0040
+3	0081 0040
+3	00C1 0040
+
+# Check that lines of set are hits with different Bit offsets
+3	0001 004F
+3	0041 004E
+3	0081 004C
+3	00C1 0048
+
+#Check that elements of SetA are still hits and that writing SetB did not interfer with them
+3	0000 0040
+3	0010 0040
+3	0020 0040
+3	0030 0040
+
+#Read over SetA
+# In SetA Read over Tag 000 with Tag 010.  This should be a Miss
+3	0100 0040	
+
+# Check that Tag 000 in Set A was written over by reading it.
+# This Reads over Tag 001 with Tag 000.
+3	0000 0040	
+
+# In SetA Read over Tag 002 with Tag 030.  This should be a Miss
+3	0300 0040
+
+# Check that Tag 002 in Set A was written over by reading it.
+# This Reads over Tag 003 with Tag 002.
+3	0020 0040	
+
+
+#PRINT INSTRUCTION CACHE TO CHECK IT
+9	0000 0040	
+
+
+#Confirm the State is as expected for SetA.  Everything should be hits
+3	0000 0040
+3	0010 0140
+3	0020 0240
+3	0030 0340
+
