@@ -1,0 +1,22 @@
+-----Data Cache------
+
+
+-----Instruction Cache-----
+
+
+---L2 Messages---
+Read from 11199999
+Read from aaa99999
+Read from 33399999
+Read from bbb99999
+Read from 22299999
+Read from 66699999
+Read from 77799999
+Return to 11199999
+
+---Statistics---
+---Data----
+No data cache
+
+---Instruction---
+No instruction cache
