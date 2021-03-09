@@ -31,7 +31,7 @@ Read for Ownership from L2 6374567b
 Write to L2 7374567f
 
 
-===Summary Statistics (End of test)===
+---Statistics---
 ---Data----
 Reads: 0
 Writes: 11
@@ -40,8 +40,4 @@ Misses: 9
 H/M: 0.22.
 
 ---Instruction---
-Reads: 0
-Writes: 0
-Hits: 0
-Misses: 0
-H/M: 0
+
