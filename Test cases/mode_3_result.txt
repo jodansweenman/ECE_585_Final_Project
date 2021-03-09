@@ -1,0 +1,47 @@
+-----Data Cache------
+--Set 1159 ---
+Tag:  | afe | 243  | 398 | 834 | 485 | 457 | 371 | d9e |
+LRU:  | 7   | 3    | 0   | 1   |  2  | 4   |  5  | 6   |
+MESI: |  I  |  E   | E   | E   |  E  |  I  |  I  | I   |
+
+-----Instruction Cache-----
+--Set 1159 ---
+Tag:  | afe | 457 | 371 | d9e |
+LRU:  |  3  |  0  | 1   | 2   |
+MESI: |  I  |  I  | I   | I   |
+
+---L2 Messages---
+Read from 12345678
+Write to L2 12345678
+Read from 24345678
+Read from 39845673
+Read from 83445673
+Read from 48545678
+Read from 45745673
+Read from 37145679
+Read from d9e4567f
+Read from afe45679
+Read from 12345678
+Write to L2 12345678
+Read from 24345678
+Read from 39845673
+Read from 83445673
+Read from 48545678
+Read from 45745673
+Read from 37145679
+Read from d9e4567f
+Read from afe45679
+
+---Statistics---
+---Data----
+Reads: 10
+Writes: 0
+Hits: 1
+Misses: 9
+H/M: 0.11
+---Instruction---
+Reads: 10 
+Writes: 0
+Hits: 1 
+Misses: 9 
+H/M: 0.11

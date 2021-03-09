@@ -1,0 +1,33 @@
+-----Data Cache------
+--Set 1159 ---
+Tag:  | aaa | bbb  | ccc | ddd | eee | fff | 111 | 333 |
+LRU:  | 0   | 1    | 2   | 3   |  4  | 5   |  6  | 7   |
+MESI: |  E  |  E   | E   | E   |  E  |  E  |  E  | E   |
+
+-----Instruction Cache-----
+
+---L2 Messages---
+Read from aaa12345
+Write to L2 aaa12345
+Read from bbb12345
+Read from ccc12345
+Read from ddd12345
+Read from eee12345
+Read from fff12345 
+Read from 11112345
+Read from 22212345
+Read from 33312345
+
+--Statistics--
+---Data----
+Reads: 9 
+Writes: 0
+Hits: 0
+Misses: 9 
+H/M: 0
+---Instruction---
+Reads: 0
+Writes: 0
+Hits: 0
+Misses: 0
+H/M: 0
