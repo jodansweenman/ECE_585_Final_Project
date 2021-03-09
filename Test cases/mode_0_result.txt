@@ -26,8 +26,4 @@ Hits: 1
 Misses: 9
 H/M: 0.11
 ---Instruction---
-Reads: 0
-Writes: 0
-Hits: 0
-Misses: 0
-H/M: 0
+
