@@ -1,14 +1,13 @@
 /**************************************************************************************
 * cache.cpp
 *
-* Authors: Josiah Sweeney, Melinda Van, Nguyen
+* Project Team 6: Josiah Sweeney, Melinda Van, Nguyen Pham, Neima Kashini
+* Class: ECE 585
+* Term: Winter 2021
 *
+* This file contains the source code for the simulation of a cache controller with a split
+* 4-way set associative instruction cache and an 8-way set associative data cache.
 *
-*
-*
-*
-*
-
 ***************************************************************************************/
 
 
