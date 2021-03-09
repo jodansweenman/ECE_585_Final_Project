@@ -8,7 +8,7 @@ MESI: |  I  |  S   | E   | E   |  E  |  I  |  I  | I   |
 --Set 1159 ---
 Tag:  | afe | 457 | 371 | d9e |
 LRU:  |  3  |  0  | 1   | 2   |
-MESI: |  I  |  I  | I   | I   |
+MESI: |  E  |  E  | E   | E   |
 
 ---L2 Messages---
 Read from 12345678
