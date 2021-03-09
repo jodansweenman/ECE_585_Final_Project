@@ -606,23 +606,31 @@ int invalidate_command(unsigned int addr) {
 		if (data_cache[i][set].tag == tag) {
 			switch (data_cache[i][set].MESI) {
 				case 'M':
+					data_cache[i][set].tag = tag;
+					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';	// Change MESI bit to Invalid
 					data_cache[i][set].address = addr;
 					break;
 					
 				case 'E':
+					data_cache[i][set].tag = tag;
+					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';	// Change MESI bit to Invalid
 					data_cache[i][set].address = addr;
 					break;
 					
 				case 'S':
+					data_cache[i][set].tag = tag;
+					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';	// Change MESI bit to Invalid
 					data_cache[i][set].address = addr;
 					break;
 					
 				case 'I':
+					data_cache[i][set].tag = tag;
+					data_cache[i][set].set = set;
 					data_cache[i][set].address = addr;
-					return 0;						// Do nothing as state is already invalid
+					break;							// Do nothing as state is already invalid
 					
 				default:
 					return -1;						// Non-MESI state recorded. ERROR
@@ -650,29 +658,31 @@ int snooping(unsigned int addr) {
 		if (data_cache[i][set].tag == tag) {
 			switch (data_cache[i][set].MESI) {
 				case 'M':
-					cout << "Here 1" << endl;
+					data_cache[i][set].tag = tag;
+					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';		// Change MESI bit to Invalid
 					data_cache[i][set].address = addr;
 					break;
 					
 				case 'E':
-					cout << "Here 2" << endl;
+					data_cache[i][set].tag = tag;
+					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';		// Change MESI bit to Invalid
 					data_cache[i][set].address = addr;
 					break;
 					
 				case 'S':
-					cout << "Here 3" << endl;
+					data_cache[i][set].tag = tag;
+					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';		// Change MESI bit to Invalid
 					data_cache[i][set].address = addr;
 					break;
 					
 				case 'I':
-					cout << "Here 4" << endl;
-					cout << data_cache[i][set].MESI << endl;
-					data_cache[i][set].MESI = 'I';		// Change MESI bit to Invalid
+					data_cache[i][set].tag = tag;
+					data_cache[i][set].set = set;
 					data_cache[i][set].address = addr;
-					return 0;							// Do nothing as state is already invalid
+					break;								// Do nothing as state is already invalid
 					
 				default:
 					return -1;							// Non-MESI state recorded. ERROR
