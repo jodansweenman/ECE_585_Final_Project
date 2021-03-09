@@ -2,7 +2,7 @@
 --Set 1159 ---
 Tag:  | afe | 243  | 398 | 834 | 485 | 457 | 371 | d9e |
 LRU:  | 7   | 3    | 0   | 1   |  2  | 4   |  5  | 6   |
-MESI: |  E  |  E   | E   | E   |  E  |  E  |  E  | E   |
+MESI: |  E  |  S   | E   | E   |  E  |  E  |  E  | E   |
 
 --Instruction Cache---
 
