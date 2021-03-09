@@ -18,6 +18,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <string.h>
 
 #define BYTE 6
 #define SET 14
@@ -146,6 +147,9 @@ int main(int argc, char** argv) {
  */
  int file_parser(char *filename) {
  	
+ 	char line[1024];
+ 	char temp_op[1];
+ 	
  	unsigned int operation;								// Operation parsed from input
  	unsigned int address;								// Address parsed from input
  	FILE *fp;											// .txt test file pointer
@@ -153,57 +157,63 @@ int main(int argc, char** argv) {
  	if(!(fp = fopen(filename, "r"))) {
  		cout << "\n\t ERROR: File Cannot Open" << endl;
 	 }
- 	
- 	while (fscanf(fp, "%d %x", &operation, &address) != EOF) {
- 		switch(operation) {
- 			case READ :
- 				if(cache_read(address)) {
- 					cout << "\n\t ERROR: L1 Data Cache Read" << endl;
-				 }
-				break;	
-				
-			case WRITE :
-				if(cache_write(address)) {
-					cout << "\n\t ERROR: L1 Data Cache Write" << endl;
-				}
-				break;
-			
-			case FETCH :
-				if(instruction_fetch(address)) {
-					cout << "\n\t ERROR: L1 Instruction Cache Fetch" << endl;
-				}
-				break;
-				
-			case INVAL :
-				if(invalidate_command(address)) {
-					cout << "\n\t ERROR: L2 Cache Invalidate Command" << endl;
-				}
-				break;
-			
-			case SNOOP :
-				if(snooping(address)) {
-					cout << "\n\t ERROR: L2 Snoop Data Request" << endl;
-				}
-				break;
-			
-			case RESET :
-				reset_cache();
-				break;
-			
-			case PRINT :
-				print_cache();
-				break;
-				
-			default :
-				cout << "\n\t ERROR: Invalid Command" << endl;
-				break;
-		 }
- 		
-	 }
 	 
-	 fclose(fp);
+	while(fgets(line, sizeof line, fp)) {
+		
+		sscanf(line,"%c %x", &temp_op, &address);
+		if(!strcmp(temp_op,"#")||!strcmp(line,"\n")||!strcmp(line," ")){
+ 			continue; 			
+		}
+		else {
+			operation = atoi(temp_op);
+			switch(operation) {
+	 			case READ :
+	 				if(cache_read(address)) {
+	 					cout << "\n\t ERROR: L1 Data Cache Read" << endl;
+					 }
+					break;	
+					
+				case WRITE :
+					if(cache_write(address)) {
+						cout << "\n\t ERROR: L1 Data Cache Write" << endl;
+					}
+					break;
+				
+				case FETCH :
+					if(instruction_fetch(address)) {
+						cout << "\n\t ERROR: L1 Instruction Cache Fetch" << endl;
+					}
+					break;
+					
+				case INVAL :
+					if(invalidate_command(address)) {
+						cout << "\n\t ERROR: L2 Cache Invalidate Command" << endl;
+					}
+					break;
+				
+				case SNOOP :
+					if(snooping(address)) {
+						cout << "\n\t ERROR: L2 Snoop Data Request" << endl;
+					}
+					break;
+				
+				case RESET :
+					reset_cache();
+					break;
+				
+				case PRINT :
+					print_cache();
+					break;
+					
+				default :
+					cout << "\n\t ERROR: Invalid Command" << endl;
+					break;
+			}
+		}
+	}
+	fclose(fp);
 	 
-	 return 0;
+	return 0;
  	
  }
  
@@ -525,7 +535,7 @@ int instruction_fetch(unsigned int addr) {
 		
 		// Simulate L2 Instruction Cache Read
 		if(mode > 0) {
-			cout << "Instruction Cache Miss: Read frin L2 " << hex << addr << " [Instruction]" << endl;
+			cout << "Instruction Cache Miss: Read from L2 " << hex << addr << " [Instruction]" << endl;
 		}
 		// Check  for an empty set in the cache line
 		for (int i = 0; cache_way < 0 && i < 4; ++i) {
@@ -654,6 +664,10 @@ int snooping(unsigned int addr) {
 					
 				default:
 					return -1;							// Non-MESI state recorded. ERROR
+			}
+			
+			if (mode > 0) {
+				cout << "Return data to L2 " << hex << addr << endl;
 			}
 		}	
 	}
