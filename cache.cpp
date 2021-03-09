@@ -109,23 +109,23 @@ int main(int argc, char** argv) {
 	
 	// Reading in file name from command line
 	char *test_file = argv[1];
-	while(true){
-		// Select a mode
-		cout << "\n\t Select Mode" << endl;
-		cout << "Mode 0: Summary of usage statistics and print commands only" << endl;
-		cout << "Mode 1: Information from Mode 0 with messages to L2 in addition" << endl;
-		cout << "Mode 2: Information from previous modes with information for every cache hit" << endl;
 	
-		do {
-			cout << "\nEnter Mode: ";
-			scanf("%u", &mode);
-		}while(mode > 2);
+	// Select a mode
+	cout << "\n\t Select Mode" << endl;
+	cout << "Mode 0: Summary of usage statistics and print commands only" << endl;
+	cout << "Mode 1: Information from Mode 0 with messages to L2 in addition" << endl;
+	cout << "Mode 2: Information from previous modes with information for every cache hit" << endl;
 	
-		if (file_parser(test_file)) {
-			cout << "\n\t ERROR: Parsing File Failed";
-		}
-		cout <<"\n\n\t Testing Completed: Closing Program... \n\n\n";
+	do {
+		cout << "\nEnter Mode: ";
+		scanf("%u", &mode);
+	}while(mode > 2);
+	
+	if (file_parser(test_file)) {
+		cout << "\n\t ERROR: Parsing File Failed";
 	}
+	cout <<"\n\n\t Testing Completed: Closing Program... \n\n\n";
+	
 	return 0;
 }
 
