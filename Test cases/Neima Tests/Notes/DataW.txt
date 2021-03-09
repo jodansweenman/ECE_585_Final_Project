@@ -1,0 +1,115 @@
+# Formate 3	0000 0000 0000		0000 0000 0000 01	00 0000		0000 0040
+
+# First 3 hex numbers are Tag, 3.5 hex numbers are index, 1.5 hex numbers are offset
+
+# 0 Read
+# 1 Write
+# 2 Read Instruction
+# 3 Invalidate
+# 4 Snoop Read For Ownership
+# 8 Reset
+# 9 Print
+
+#READING INSTRUCTION CACH TESTS
+
+#Reset
+8 00000000
+
+
+
+#Test Reading a Line and then Writing to it
+#The Line should miss on the Read and then hit on the write
+#Way1
+1 F0000100
+0 F0000101
+#Way2
+1 F0100102
+0 F0100103
+#Way3
+1 F0200104
+0 F0200105
+#Way4
+1 F0300106
+0 F0300107
+#Way5
+1 F0400108
+0 F0400109
+#Way6
+1 F050 010A
+0 F050 010B
+#Way7
+1 F060010C
+0 F060010D
+#Way8
+1 F070010E
+0 F070010F
+
+#Print
+9 00000100
+
+#This Command will Replace Way #1
+1 F0800100
+0 F0800101
+
+#Way1 Should have been replaced by the last command
+9 00000100
+
+#Test Writing a Line and then Reading it
+#The Line should miss on the write and then hit on the read.  The Read will also turn it to a Shared value
+#Way1
+0 F0000200
+1 F0000201
+#Way2
+0 F0100202
+1 F0100203
+#Way3
+0 F0200204
+1 F0200205
+#Way4
+0 F0300206
+1 F0300207
+#Way5
+0 F0400208
+1 F0400209
+#Way6
+0 F050020A
+1 F050020B
+#Way7
+0 F060020C
+1 F060020D
+#Way8
+0 F070020E
+1 F070020F
+
+
+9 00000200
+
+#This Command will Replace Way #1
+#The Line being replaced in Way #1 should write out to Memory before it is replaced
+# F0000200 Is the line that should be replaced
+
+0 F0800200
+1 F0800201
+
+#Way1 Should have been replaced by the last command
+9 00000200
+
+#Test what happenes if Read is read for a Modified Line
+0 F0100200
+#Test what happenes if Read For Own is read for a Modified Line
+3 F0200200
+3 F0300200
+
+#Test what happenes if Invalidate is read for a Modified Line
+4 F0400200
+4 F0500200
+
+#Print
+9 00000200
+
+#Check if Lines that should have just been invalidated now hit on a Read
+0 F0200200
+0 F0400200
+#Check if Lines that should have just been invalidated now hit on a Write
+1 F0300200
+1 F0500200

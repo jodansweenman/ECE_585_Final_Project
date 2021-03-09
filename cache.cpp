@@ -118,14 +118,11 @@ int main(int argc, char** argv) {
 	do {
 		cout << "\nEnter Mode: ";
 		scanf("%u", &mode);
-	}
-	while(mode > 2);
+	}while(mode > 2);
 	
 	if (file_parser(test_file)) {
 		cout << "\n\t ERROR: Parsing File Failed";
 	}
-	
-	
 	cout <<"\n\n\t Testing Completed: Closing Program... \n\n\n";
 	
 	return 0;

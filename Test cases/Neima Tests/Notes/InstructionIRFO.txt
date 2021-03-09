@@ -1,0 +1,158 @@
+# Formate 3	0000 0000 0000		0000 0000 0000 01	00 0000		0000 0040
+
+# First 3 hex numbers are Tag, 3.5 hex numbers are index, 1.5 hex numbers are offset
+
+# 0 Read
+# 1 Write
+# 2 Read Instruction
+# 3 Invalidate
+# 4 Snoop Read For Ownership
+# 8 Reset
+# 9 Print
+
+#READING INSTRUCTION CACH TESTS
+
+#Reset
+8 00000000
+
+#Print
+9 0011100
+
+#Test out Invalidate and Snoop for Ownership on Set that has not been used
+3 0011100
+4 0011100
+
+
+#Print
+9 0011100
+
+#CONTROL CASE WITHOUT INVALIDATE
+#Fill Set with Write
+2 000FF1FF
+2 001FF1F
+2 002FF1FF
+2 003FF1FF
+2 004FF1FF
+2 005FF1FF
+2 006FF1FF
+2 007FF1FF
+#Print
+9 000FF1FF
+# Write and Replace Set Members Based on LRU 000 to 003
+2 008FF1FF
+2 009FF1FF
+2 00AFF1FF
+2 00BFF1FF
+#Print to Check What is Replaced
+9 000FF1FF
+# Write and Replace Set Members Based on LRU 004 to 007
+2 00CFF1FF
+2 00DFF1FF
+2 00EFF1FF
+2 00FFF1FF
+#Print to Check What is Replaced
+9 000FF1FF
+
+
+
+
+#INVALIDATE CASE
+#Fill Set with Write
+2 00001100
+2 00101100
+2 00201100
+2 00301100
+2 00401100
+2 00501100
+2 00601100
+2 00701100
+#Print
+9 00001100
+
+# Invalidate Tags 001 003 005 and 007
+3 00101100
+3 00301100
+3 00501100
+3 00701100
+#Print
+9 00001100
+
+# Write and Replace Invalidated Tags 001
+2 00801100
+# Read and Replace Invalidated Tags 003
+2 00901100
+#Print to Check What is Replaced
+9 00001100
+
+# Read and Replace Invalidated Tags 005
+2 00A01100
+# Write and Replace Invalidated Tags 007
+2 00B01100
+#Print to Check What is Replaced
+9 00001100
+
+# Write and Replace Based on LRU Tags 000
+2 00C01100
+# Read and Replace Based on LRU Tags 002
+2 00D01100
+#Print to Check What is Replaced
+9 00001100
+
+#Read and Replace Based on LRU Tags 004
+2 00E01100
+# Write and Replace Based on LRU Tags 006
+2 00F01100
+#Print to Check What is Replaced
+9 00001100
+
+
+#READ TO OWN CASE
+#Fill Set with Write
+2 000FFFFF
+2 001FFFFF
+2 002FFFFF
+2 003FFFFF
+2 004FFFFF
+2 005FFFFF
+2 006FFFFF
+2 007FFFFF
+#Print
+9 000FFFFF
+
+# Invalidate Tags 001 003 005 and 007
+3 001FFFFF
+3 003FFFFF
+3 005FFFFF
+3 007FFFFF
+#Print
+9 000FFFFF
+
+# Write and Replace Invalidated Tags 001
+2 008FFFFF
+# Read and Replace Invalidated Tags 003
+2 009FFFFF
+#Print to Check What is Replaced
+9 000FFFFF
+
+# Read and Replace Invalidated Tags 005
+2 00AFFFFF
+# Write and Replace Invalidated Tags 007
+2 00BFFFFF
+#Print to Check What is Replaced
+9 000FFFFF
+
+# Write and Replace Based on LRU Tags 000
+2 00CFFFFF
+# Read and Replace Based on LRU Tags 002
+2 00DFFFFF
+#Print to Check What is Replaced
+9 000FFFFF
+
+#Read and Replace Based on LRU Tags 004
+2 00EFFFFF
+# Write and Replace Based on LRU Tags 006
+2 00FFFFFF
+#Print to Check What is Replaced
+9 000FFFFF
+
+
