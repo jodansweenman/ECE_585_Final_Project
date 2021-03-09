@@ -118,11 +118,14 @@ int main(int argc, char** argv) {
 	do {
 		cout << "\nEnter Mode: ";
 		scanf("%u", &mode);
-	}while(mode > 2);
+	}
+	while(mode > 2);
 	
 	if (file_parser(test_file)) {
 		cout << "\n\t ERROR: Parsing File Failed";
 	}
+	
+	
 	cout <<"\n\n\t Testing Completed: Closing Program... \n\n\n";
 	
 	return 0;
@@ -156,9 +159,8 @@ int main(int argc, char** argv) {
 	 
 	while(fgets(line, sizeof line, fp)) {
 		
-		sscanf(line,"%c %x", &temp_op, &address);
-		if(!strcmp(temp_op,"#")||!strcmp(line,"\n")||!strcmp(line," ")){
- 			continue; 			
+		sscanf(line,"%c %x", temp_op, &address);
+		if(line[0]=='#'||!strcmp(line,"\n")||!strcmp(line," ")){ 			
 		}
 		else {
 			operation = atoi(temp_op);
@@ -605,17 +607,21 @@ int invalidate_command(unsigned int addr) {
 			switch (data_cache[i][set].MESI) {
 				case 'M':
 					data_cache[i][set].MESI = 'I';	// Change MESI bit to Invalid
+					data_cache[i][set].address = addr;
 					break;
 					
 				case 'E':
 					data_cache[i][set].MESI = 'I';	// Change MESI bit to Invalid
+					data_cache[i][set].address = addr;
 					break;
 					
 				case 'S':
 					data_cache[i][set].MESI = 'I';	// Change MESI bit to Invalid
+					data_cache[i][set].address = addr;
 					break;
 					
 				case 'I':
+					data_cache[i][set].address = addr;
 					return 0;						// Do nothing as state is already invalid
 					
 				default:
@@ -644,18 +650,28 @@ int snooping(unsigned int addr) {
 		if (data_cache[i][set].tag == tag) {
 			switch (data_cache[i][set].MESI) {
 				case 'M':
+					cout << "Here 1" << endl;
 					data_cache[i][set].MESI = 'I';		// Change MESI bit to Invalid
+					data_cache[i][set].address = addr;
 					break;
 					
 				case 'E':
+					cout << "Here 2" << endl;
 					data_cache[i][set].MESI = 'I';		// Change MESI bit to Invalid
+					data_cache[i][set].address = addr;
 					break;
 					
 				case 'S':
+					cout << "Here 3" << endl;
 					data_cache[i][set].MESI = 'I';		// Change MESI bit to Invalid
+					data_cache[i][set].address = addr;
 					break;
 					
 				case 'I':
+					cout << "Here 4" << endl;
+					cout << data_cache[i][set].MESI << endl;
+					data_cache[i][set].MESI = 'I';		// Change MESI bit to Invalid
+					data_cache[i][set].address = addr;
 					return 0;							// Do nothing as state is already invalid
 					
 				default:
@@ -763,7 +779,8 @@ void print_cache() {
 					set_flag = 1;
 				}
 				cout << "Way No: " << dec << l << endl;
-				cout << "Address: " << hex << instruction_cache[l][k].address << " Tag: " << instruction_cache[l][k].tag << " Set: " << instruction_cache[l][k].set << " LRU: " << instruction_cache[l][k].LRU << " MESI State: " << instruction_cache[l][k].MESI << endl;
+				cout << "Address: " << hex << instruction_cache[l][k].address << " Tag: " << instruction_cache[l][k].tag << " Set: " 
+					<< instruction_cache[l][k].set << " LRU: " << instruction_cache[l][k].LRU << " MESI State: " << instruction_cache[l][k].MESI << endl;
 			}
 		}
 		set_flag = 0;
