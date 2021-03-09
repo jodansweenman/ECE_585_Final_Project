@@ -1,0 +1,33 @@
+-----Instruction Cache------
+--Set 1159 ---
+Tag:  | afe | 457 | 371 | d9e |
+LRU:  |  3  |  0  | 1   | 2   |
+MESI: |  E  |  E  | E   | E   |
+
+-----Data Cache-----
+
+---L2 Messages---
+Read from 12345678
+Write to L2 12345678
+Read from 24345678
+Read from 39845673
+Read from 83445673
+Read from 48545678
+Read from 45745673
+Read from 37145679
+Read from d9e4567f
+Read from afe45679
+
+--Statistic--
+---Instruction----
+Reads: 10
+Writes: 0
+Hits: 1 
+Misses: 9
+H/M: 0.11
+---Data---
+Reads: 0
+Writes: 0
+Hits: 0
+Misses: 0
+H/M: 0

@@ -1,0 +1,47 @@
+
+----Data Cache ------
+--Set 1159---
+Tag:  | 737 | 848  | 282 | 838 | 733 | 428| 637 |
+LRU:  | 7   | 1    |  2  |  3  |  4  |5   | 6   |
+MESI: |  M  |  M   | M   | M   |  M  | M  | M   |
+
+--Set 21c7-
+Tag:  | 246 |
+LRU:  | 7   |
+MESI: | M   |
+
+--Set 21c4--
+Tag:  | 246 |
+LRU:  |  7  |
+MESI: |  M  |
+
+----Instruction Cache---
+
+---L2 Messages---
+Read for Ownership from L2 7374567f
+Read for Ownership from L2 84845671
+Read for Ownership from L2 28245671
+Read for Ownership from L2 83845672
+Write to L2 73745671
+Read for Ownership from L2 246871ff
+Read for Ownership from L2 24687123
+Read for Ownership from L2 7334567a
+Read for Ownership from L2 42845673
+Read for Ownership from L2 6374567b
+Write to L2 7374567f
+
+
+===Summary Statistics (End of test)===
+---Data----
+Reads: 0
+Writes: 11
+Hits:2 
+Misses: 9 
+H/M: 0.22.
+
+---Instruction---
+Reads: 0
+Writes: 0
+Hits: 0
+Misses: 0
+H/M: 0
