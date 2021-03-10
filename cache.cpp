@@ -90,9 +90,7 @@ Cache instruction_cache[4][16384];
 Cache_stats stats;
 
 /**************************************************************************************
-
 *				MAIN CACHE CONTROLLER
-
 **************************************************************************************/
 int main(int argc, char** argv) {
 	
@@ -132,9 +130,7 @@ int main(int argc, char** argv) {
 }
 
 /**************************************************************************************
-
 *				CACHE SUBFUNCTIONS
-
 **************************************************************************************/
 /* Test file text parser
  * Parses text data in the format of <n FFFFFFFF>
@@ -247,7 +243,7 @@ int main(int argc, char** argv) {
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
 				if(mode >= 2) {
-					cout << "Data Cache Hit" << hex << addr << << endl;
+					cout << "Data Cache Hit" << hex << addr << endl;
 				}
 				break;
 			
@@ -260,7 +256,7 @@ int main(int argc, char** argv) {
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
 				if(mode >= 2) {
-					cout << "Data Cache Hit" << hex << addr << << endl;
+					cout << "Data Cache Hit" << hex << addr << endl;
 				}
 				break;
 			
@@ -273,7 +269,7 @@ int main(int argc, char** argv) {
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
 				if(mode >= 2) {
-					cout << "Data Cache Hit" << hex << addr << << endl;
+					cout << "Data Cache Hit" << hex << addr << endl;
 				}
 				break;
 				
