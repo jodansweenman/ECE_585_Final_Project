@@ -1,0 +1,107 @@
+# Formate 3	0000 0000 0000		0000 0000 0000 01	00 0000		0000 0040
+
+# First 3 hex numbers are Tag, 3.5 hex numbers are index, 1.5 hex numbers are offset
+#SetA 0000 0000 0000 01
+#SetB 0001 0000 0000 01.
+
+
+#RESET
+8 00000000
+
+#READING INSTRUCTION CACHE TESTS
+#Fill up SetA.  Each Should be a miss
+
+2 00000040
+2 00100140
+2 00200240
+2 00300340
+
+# Check that lines elements of set are hits and turn them from Exclusive to Share
+2 00000040
+2 00100140
+2 00200240
+2 00300340
+
+# Check that lines of set are hits with different Bit offsets
+2 00000041
+2 00100142
+2 00200244
+2 00300348
+
+# The set of 4 commands should have just set those lines to Invalid
+
+#Make sure that a different Set can be filled with different tags. This should not influence previous Set
+#Fill up SetB  
+#Each Should be a miss and should not incluence SetA
+2 00010040
+2 00410040
+2 00810040
+2 00C10040
+
+
+# Check that lines elements of set are hits and turn them from Exclusive to Share
+2 00010040
+2 00410040
+2 00810040
+2 00C10040
+
+# Check that lines of set are hits with different Bit offsets
+2 0001004F
+2 0041004E
+2 0081004C
+2 00C10048
+
+#Check that elements of SetA are still hits and that writing SetB did not interfer with them
+2 00000040
+2 00100040
+2 00200040
+2 00300040
+
+#Read over SetA
+# In SetA Read over Tag 000 with Tag 010.  This should be a Miss
+2 01000040	
+
+# Check that Tag 000 in Set A was written over by reading it.
+# This Reads over Tag 001 with Tag 000.
+2 00000040	
+
+# In SetA Read over Tag 002 with Tag 030.  This should be a Miss
+2 03000040
+
+# Check that Tag 002 in Set A was written over by reading it.
+# This Reads over Tag 003 with Tag 002.
+2 00200040	
+
+
+#PRINT INSTRUCTION CACHE TO CHECK IT
+#9 00000040	
+
+
+#Confirm the State is as expected for SetA.  Everything should be hits
+2 00000040
+2 00100140
+2 00200240
+2 00300340
+
+#PRINT INSTRUCTION CACHE TO CHECK IT
+#9 00000040	
+
+
+#Invalidate and Read For Ownership on Set A
+3 00000040
+3 00100140
+4 00200240
+4 00300340
+
+#PRINT INSTRUCTION CACHE TO CHECK IT
+#9 00000040	
+
+
+#Check that Invalidate and REad for Ownership cause Misses
+2 00000040
+2 00100140
+2 00200240
+2 00300340
+
+#PRINT INSTRUCTION CACHE TO CHECK IT
+#9 00000040	
