@@ -247,7 +247,7 @@ int main(int argc, char** argv) {
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
 				if(mode >= 2) {
-					cout << "Data Cache Hit" << endl;
+					cout << "Data Cache Hit" << hex << addr << << endl;
 				}
 				break;
 			
@@ -260,7 +260,7 @@ int main(int argc, char** argv) {
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
 				if(mode >= 2) {
-					cout << "Data Cache Hit" << endl;
+					cout << "Data Cache Hit" << hex << addr << << endl;
 				}
 				break;
 			
@@ -273,7 +273,7 @@ int main(int argc, char** argv) {
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
 				if(mode >= 2) {
-					cout << "Data Cache Hit" << endl;
+					cout << "Data Cache Hit" << hex << addr << << endl;
 				}
 				break;
 				
@@ -379,7 +379,7 @@ int cache_write(unsigned int addr) {
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Message
-				if (mode == 2) {
+				if (mode >= 2) {
 					cout << "Data Cache Hit" << endl;
 				}
 				break;
@@ -392,7 +392,7 @@ int cache_write(unsigned int addr) {
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Message
-				if (mode == 2) {
+				if (mode >= 2) {
 					cout << "Data Cache Hit" << endl;
 				}
 				break;
@@ -405,7 +405,7 @@ int cache_write(unsigned int addr) {
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Message
-				if (mode == 2) {
+				if (mode >= 2) {
 					cout << "Data Cache Hit" << endl;
 				}
 				break;
@@ -517,7 +517,7 @@ int instruction_fetch(unsigned int addr) {
 				instruction_cache[cache_way][set].address = addr;
 				instruction_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
-		 		if (mode == 2) {
+		 		if (mode >= 2) {
 		 			cout << "Instruction Cache Hit" << endl;
 				}
 				break;
@@ -530,7 +530,7 @@ int instruction_fetch(unsigned int addr) {
 				instruction_cache[cache_way][set].address = addr;
 				instruction_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
-		 		if (mode == 2) {
+		 		if (mode >= 2) {
 		 			cout << "Instruction Cache Hit" << endl;
 				}
 				break;
@@ -543,7 +543,7 @@ int instruction_fetch(unsigned int addr) {
 				instruction_cache[cache_way][set].address = addr;
 				instruction_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
-		 		if (mode == 2) {
+		 		if (mode >= 2) {
 		 			cout << "Instruction Cache Hit" << endl;
 				}
 				break;
@@ -636,6 +636,9 @@ int invalidate_command(unsigned int addr) {
 		if (data_cache[i][set].tag == tag) {
 			switch (data_cache[i][set].MESI) {
 				case 'M':
+					if(mode >= 3) {
+						cout << "Invalidate on  " << hex << addr << " From other Processor" << endl;
+					}
 					data_cache[i][set].tag = tag;
 					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';	// Change MESI bit to Invalid
@@ -643,6 +646,9 @@ int invalidate_command(unsigned int addr) {
 					break;
 					
 				case 'E':
+					if(mode >= 3) {
+						cout << "Invalidate on  " << hex << addr << " From other Processor" << endl;
+					}	
 					data_cache[i][set].tag = tag;
 					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';	// Change MESI bit to Invalid
@@ -650,6 +656,9 @@ int invalidate_command(unsigned int addr) {
 					break;
 					
 				case 'S':
+					if(mode >= 3) {
+						cout << "Invalidate on  " << hex << addr << " From other Processor" << endl;
+					}
 					data_cache[i][set].tag = tag;
 					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';	// Change MESI bit to Invalid
@@ -688,6 +697,9 @@ int snooping(unsigned int addr) {
 		if (data_cache[i][set].tag == tag) {
 			switch (data_cache[i][set].MESI) {
 				case 'M':
+					if(mode >= 3) {
+						cout << "Read To Own Signal on  " << hex << addr << " From other Processor" << endl;
+					}		
 					data_cache[i][set].tag = tag;
 					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';		// Change MESI bit to Invalid
@@ -695,6 +707,9 @@ int snooping(unsigned int addr) {
 					break;
 					
 				case 'E':
+					if(mode >= 3) {
+						cout << "Read To Own Signal on  " << hex << addr << " From other Processor" << endl;
+					}	
 					data_cache[i][set].tag = tag;
 					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';		// Change MESI bit to Invalid
@@ -702,6 +717,9 @@ int snooping(unsigned int addr) {
 					break;
 					
 				case 'S':
+					if(mode >= 3) {
+						cout << "Read To Own Signal on  " << hex << addr << " From other Processor" << endl;
+					}	
 					data_cache[i][set].tag = tag;
 					data_cache[i][set].set = set;
 					data_cache[i][set].MESI = 'I';		// Change MESI bit to Invalid
