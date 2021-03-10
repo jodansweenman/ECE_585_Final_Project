@@ -246,7 +246,7 @@ int main(int argc, char** argv) {
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
-				if(mode == 2) {
+				if(mode >= 2) {
 					cout << "Data Cache Hit" << endl;
 				}
 				break;
@@ -259,7 +259,7 @@ int main(int argc, char** argv) {
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
-				if(mode == 2) {
+				if(mode >= 2) {
 					cout << "Data Cache Hit" << endl;
 				}
 				break;
@@ -272,7 +272,7 @@ int main(int argc, char** argv) {
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
-				if(mode == 2) {
+				if(mode >= 2) {
 					cout << "Data Cache Hit" << endl;
 				}
 				break;
