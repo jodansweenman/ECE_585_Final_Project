@@ -119,7 +119,7 @@ int main(int argc, char** argv) {
 		cout << "\nEnter Mode: ";
 		scanf("%u", &mode);
 	}
-	while(mode > 2);
+	while(mode > 3);
 	
 	if (file_parser(test_file)) {
 		cout << "\n\t ERROR: Parsing File Failed";
