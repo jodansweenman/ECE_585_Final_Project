@@ -235,42 +235,59 @@ int main(int argc, char** argv) {
  	cache_way = data_tag_match(tag, set);	
 	 
 	if(cache_way >= 0) {							// Data Cache Hit
-		stats.data_cache_hit++;
-		// Debug Mode Message
-		if(mode == 2) {
-			cout << "Data Cache Hit" << endl;
-		}
+		
+				
 		switch (data_cache[cache_way][set].MESI) {
 			case 'M' :
+				stats.data_cache_hit++;
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'M';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
+				// Debug Mode Message
+				if(mode == 2) {
+					cout << "Data Cache Hit" << endl;
+				}
 				break;
 			
 			case 'E' :
+				stats.data_cache_hit++;
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'S';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
+				// Debug Mode Message
+				if(mode == 2) {
+					cout << "Data Cache Hit" << endl;
+				}
 				break;
 			
 			case 'S' :
+				stats.data_cache_hit++;
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'S';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
+				// Debug Mode Message
+				if(mode == 2) {
+					cout << "Data Cache Hit" << endl;
+				}
 				break;
 				
 			case 'I' :
+				stats.data_cache_miss++;
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'S';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
+				// Simulate L2 Cache Read
+				if (mode > 0) {
+					cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data]" << endl;
+				}
 				break;
 		}
 	}
@@ -284,7 +301,7 @@ int main(int argc, char** argv) {
 		
 		// Check for an empty set in the cache line
  		for (int i = 0; cache_way < 0 && i < 8; ++i) {
- 			if (data_cache[i][set].tag == 0) {
+ 			if (data_cache[i][set].tag == 4096) {
  				cache_way = i;
  				empty_cache = 1;
 			}
@@ -357,45 +374,57 @@ int cache_write(unsigned int addr) {
  	cache_way = data_tag_match(tag, set);	
 	 
 	if(cache_way >= 0) {								// Data Cache Hit
-		
-		stats.data_cache_hit++;
-		
-		// Debug Message
-		if (mode == 2) {
-			cout << "Data Cache Hit" << endl;
-		}
-		
+				
 		switch (data_cache[cache_way][set].MESI) {
 			case 'M' :
+				stats.data_cache_hit++;
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'M';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
+				// Debug Message
+				if (mode == 2) {
+					cout << "Data Cache Hit" << endl;
+				}
 				break;
 			
 			case 'E' :
+				stats.data_cache_hit++;
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'M';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
+				// Debug Message
+				if (mode == 2) {
+					cout << "Data Cache Hit" << endl;
+				}
 				break;
 			
 			case 'S' :
+				stats.data_cache_hit++;
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'E';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
+				// Debug Message
+				if (mode == 2) {
+					cout << "Data Cache Hit" << endl;
+				}
 				break;
 				
 			case 'I' :
+				stats.data_cache_miss++;
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'E';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
+				if (mode > 0) {
+					cout << "Data Cache Miss: Write to L2 " << hex << addr << " [Write-Through]" << endl;
+				}
 				break;
 		}
 	}
@@ -409,7 +438,7 @@ int cache_write(unsigned int addr) {
 		
 		// Check for an empty set in the cache line
  		for (int i = 0; cache_way < 0 && i < 8; ++i) {
- 			if (data_cache[i][set].tag == 0) {
+ 			if (data_cache[i][set].tag == 4096) {
  				cache_way = i;
  				empty_cache = 1;
 			}
@@ -488,43 +517,58 @@ int instruction_fetch(unsigned int addr) {
  	cache_way = instruction_tag_match(tag, set);	// Search for a missing tag
  	
  	if(cache_way >= 0) {								// Instruction Cache Hit
- 		stats.inst_cache_hit++;	
- 		
- 		// Debug Mode Message
- 		if (mode == 2) {
- 			cout << "Instruction Cache Hit" << endl;
-		}
+		 		
  		switch (instruction_cache[cache_way][set].MESI) {
 			case 'M' :
+				stats.inst_cache_hit++;	
 				instruction_cache[cache_way][set].tag = tag;
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'M';
 				instruction_cache[cache_way][set].address = addr;
 				instruction_LRU_update(cache_way,set,empty_cache);
+				// Debug Mode Message
+		 		if (mode == 2) {
+		 			cout << "Instruction Cache Hit" << endl;
+				}
 				break;
 			
 			case 'E' :
+				stats.inst_cache_hit++;	
 				instruction_cache[cache_way][set].tag = tag;
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'S';
 				instruction_cache[cache_way][set].address = addr;
 				instruction_LRU_update(cache_way,set,empty_cache);
+				// Debug Mode Message
+		 		if (mode == 2) {
+		 			cout << "Instruction Cache Hit" << endl;
+				}
 				break;
 			
 			case 'S' :
+				stats.inst_cache_hit++;	
 				instruction_cache[cache_way][set].tag = tag;
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'S';
 				instruction_cache[cache_way][set].address = addr;
 				instruction_LRU_update(cache_way,set,empty_cache);
+				// Debug Mode Message
+		 		if (mode == 2) {
+		 			cout << "Instruction Cache Hit" << endl;
+				}
 				break;
 				
 			case 'I' :
+				stats.inst_cache_miss++;
 				instruction_cache[cache_way][set].tag = tag;
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'S';
 				instruction_cache[cache_way][set].address = addr;
 				instruction_LRU_update(cache_way,set,empty_cache);
+				// Simulate L2 Instruction Cache Read
+				if(mode > 0) {
+					cout << "Instruction Cache Miss: Read from L2 " << hex << addr << " [Instruction]" << endl;
+				}
 				break;
 		}
 	}
@@ -537,7 +581,7 @@ int instruction_fetch(unsigned int addr) {
 		}
 		// Check  for an empty set in the cache line
 		for (int i = 0; cache_way < 0 && i < 4; ++i) {
-	 		if (instruction_cache[i][set].tag == 0) {
+	 		if (instruction_cache[i][set].tag == 4096) {
 				cache_way = i;
 				empty_cache = 1;
 			}
@@ -710,7 +754,7 @@ int snooping(unsigned int addr) {
 	 // Clearing the data cache
 	 for (int i = 0; i < 8; ++i) {
 	 	for (int j = 0; j < 16384; ++j) {
-			data_cache[i][j].tag = 0;
+			data_cache[i][j].tag = 4096;
 		 	data_cache[i][j].set = 0;
 			data_cache[i][j].LRU = 0;
 		 	data_cache[i][j].MESI = 'I';
@@ -722,7 +766,7 @@ int snooping(unsigned int addr) {
 	 // Clearing the instruction cache
 	 for (int k = 0; k < 4; ++k) {
 	 	for (int l = 0; l < 16384; ++l) {
-	 		instruction_cache[k][l].tag = 0;
+	 		instruction_cache[k][l].tag = 4096;
 	 		instruction_cache[k][l].set = 0;
 	 		instruction_cache[k][l].LRU = 0;
 	 		instruction_cache[k][l].MESI = 'I';
