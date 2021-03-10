@@ -284,6 +284,9 @@ int main(int argc, char** argv) {
 				data_cache[cache_way][set].MESI = 'S';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
+				if (mode > 0) {
+					cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data]" << endl;
+				}	
 				break;
 		}
 	}
@@ -325,6 +328,9 @@ int main(int argc, char** argv) {
 				// Search for smallest LRU
 				cache_way = data_LRU_search(set);
 				if (cache_way >=0) {
+					if (mode > 2) {
+						cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data] and eject "<< data_cache[cache_way][set].tag << endl;
+					}
 					data_cache[cache_way][set].tag = tag;
 					data_cache[cache_way][set].set = set;
 					data_cache[cache_way][set].MESI = 'E';
@@ -337,6 +343,9 @@ int main(int argc, char** argv) {
 				}
 			}
 			else { 										// Else, the invalid member is evicted
+				if (mode > 2) {
+					cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data] and eject "<< data_cache[cache_way][set].tag << endl;
+				}
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'E';
@@ -380,7 +389,7 @@ int cache_write(unsigned int addr) {
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Message
 				if (mode >= 2) {
-					cout << "Data Cache Hit" << endl;
+					cout << "Data Cache Hit" << hex << addr << endl;
 				}
 				break;
 			
@@ -393,7 +402,7 @@ int cache_write(unsigned int addr) {
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Message
 				if (mode >= 2) {
-					cout << "Data Cache Hit" << endl;
+					cout << "Data Cache Hit" << hex << addr << endl;
 				}
 				break;
 			
@@ -406,7 +415,7 @@ int cache_write(unsigned int addr) {
 				data_LRU_update(cache_way,set,empty_cache);
 				// Debug Message
 				if (mode >= 2) {
-					cout << "Data Cache Hit" << endl;
+					cout << "Data Cache Hit" << hex << addr << endl;
 				}
 				break;
 				
@@ -417,6 +426,9 @@ int cache_write(unsigned int addr) {
 				data_cache[cache_way][set].MESI = 'E';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
+				if (mode > 0) {
+					cout << "Data Cache Miss: Write to L2 " << hex << addr << " [Write-Through]" << endl;
+				}
 				break;
 		}
 	}
@@ -462,6 +474,9 @@ int cache_write(unsigned int addr) {
 				// Search for smallest LRU
 				cache_way = data_LRU_search(set);
 				if (cache_way >=0) {
+					if (mode > 2) {
+						cout << "Data Cache Miss: Write to L2 " << hex << addr << " [Data] and eject "<< data_cache[cache_way][set].tag << endl;
+					}
 					data_cache[cache_way][set].tag = tag;
 					data_cache[cache_way][set].set = set;
 					data_cache[cache_way][set].MESI = 'M';
@@ -474,6 +489,9 @@ int cache_write(unsigned int addr) {
 				}
 			}
 			else { 										// Else, the invalid member is evicted
+				if (mode > 2) {
+					cout << "Data Cache Miss: Write to L2 " << hex << addr << " [Data] and eject "<< data_cache[cache_way][set].tag << endl;
+				}
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'M';
@@ -531,7 +549,7 @@ int instruction_fetch(unsigned int addr) {
 				instruction_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
 		 		if (mode >= 2) {
-		 			cout << "Instruction Cache Hit" << endl;
+		 			cout << "Instruction Cache Hit" << hex << addr << endl;
 				}
 				break;
 			
@@ -544,7 +562,7 @@ int instruction_fetch(unsigned int addr) {
 				instruction_LRU_update(cache_way,set,empty_cache);
 				// Debug Mode Message
 		 		if (mode >= 2) {
-		 			cout << "Instruction Cache Hit" << endl;
+		 			cout << "Instruction Cache Hit" << hex << addr << endl;
 				}
 				break;
 				
@@ -555,6 +573,9 @@ int instruction_fetch(unsigned int addr) {
 				instruction_cache[cache_way][set].MESI = 'S';
 				instruction_cache[cache_way][set].address = addr;
 				instruction_LRU_update(cache_way,set,empty_cache);
+				if(mode > 0) {
+					cout << "Instruction Cache Miss: Read from L2 " << hex << addr << " [Instruction]" << endl;
+				}
 				break;
 		}
 	}
@@ -593,6 +614,9 @@ int instruction_fetch(unsigned int addr) {
 			if (cache_way < 0) {
 				cache_way = instruction_LRU_search(set);
 				if (cache_way >=0) {
+					if (mode > 2) {
+						cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data] and eject "<< data_cache[cache_way][set].tag << endl;
+					}
 					instruction_cache[cache_way][set].tag = tag;
 					instruction_cache[cache_way][set].set = set;
 					instruction_cache[cache_way][set].MESI = 'E';
@@ -605,6 +629,9 @@ int instruction_fetch(unsigned int addr) {
 				}
 			}
 			else { 										// Else, the invalid member is evicted
+				if (mode > 2) {
+					cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data] and eject "<< data_cache[cache_way][set].tag << endl;
+				}
 				instruction_cache[cache_way][set].tag = tag;
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'E';
