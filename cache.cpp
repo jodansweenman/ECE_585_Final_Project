@@ -284,6 +284,9 @@ int main(int argc, char** argv) {
 				data_cache[cache_way][set].MESI = 'S';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
+				if (mode > 0) {
+					cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data]" << endl;
+				}
 				break;
 		}
 	}
@@ -555,6 +558,10 @@ int instruction_fetch(unsigned int addr) {
 				instruction_cache[cache_way][set].MESI = 'S';
 				instruction_cache[cache_way][set].address = addr;
 				instruction_LRU_update(cache_way,set,empty_cache);
+				// Simulate L2 Instruction Cache Read
+				if(mode > 0) {
+					cout << "Instruction Cache Miss: Read from L2 " << hex << addr << " [Instruction]" << endl;
+				}
 				break;
 		}
 	}
