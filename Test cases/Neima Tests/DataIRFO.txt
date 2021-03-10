@@ -1,0 +1,160 @@
+# Formate 3	0000 0000 0000		0000 0000 0000 01	00 0000		0000 0040
+
+# First 3 hex numbers are Tag, 3.5 hex numbers are index, 1.5 hex numbers are offset
+
+# 0 Read
+# 1 Write
+# 2 Read Instruction
+# 3 Invalidate
+# 4 Snoop Read For Ownership
+# 8 Reset
+# 9 Print
+
+#READING INSTRUCTION CACH TESTS
+
+#Reset
+8 00000000
+
+#Print
+#9 0011100
+
+#Test out Invalidate and Snoop for Ownership on Set that has not been used
+3 0011100
+4 0011100
+
+
+#Print
+#9 0011100
+
+#CONTROL CASE WITHOUT INVALIDATE
+#Fill Set with Write
+1 F0000100
+1 F0100100
+1 F0200100
+1 F0300100
+1 F0400100
+1 F0500100
+1 F0600100
+1 F0700100
+#Print
+#9 00000100
+# Write and Replace Set Members Based on LRU F00 to F03
+1 F0800100
+1 F0900100
+1 F0A00100
+1 F0B00100
+#Print to Check What is Replaced
+#9 00000100
+# Write and Replace Set Members Based on LRU F04 to F07
+1 F0C00100
+1 F0D00100
+1 F0E00100
+1 F0F00100
+#Print to Check What is Replaced
+#9 00000100
+
+
+
+
+#INVALIDATE CASE
+#Fill Set with Write
+1 F0001100
+1 F0101100
+1 F0201100
+1 F0301100
+1 F0401100
+1 F0501100
+1 F0601100
+1 F0701100
+#Print
+#9 00001100
+
+# Invalidate Tags F01 F03 F05 and F07
+3 F0101100
+3 F0301100
+3 F0501100
+3 F0701100
+#Print
+#9 00001100
+
+# Write and Replace Invalidated Tags F01
+1 F0801100
+# Read and Replace Invalidated Tags F03
+0 F0901100
+#Print to Check What is Replaced
+#9 00001100
+
+# Read and Replace Invalidated Tags F05
+0 F0A01100
+# Write and Replace Invalidated Tags F07
+1 F0B01100
+#Print to Check What is Replaced
+#9 00001100
+
+# Write and Replace Based on LRU Tags F00
+1 F0C01100
+# Read and Replace Based on LRU Tags F02
+0 F0D01100
+#Print to Check What is Replaced
+#9 00001100
+
+#Read and Replace Based on LRU Tags F04
+0 F0E01100
+# Write and Replace Based on LRU Tags F06
+1 F0F01100
+#Print to Check What is Replaced
+#9 00001100
+
+
+
+
+
+#SNOOP READ FOR OWNERSHIP CASE
+#Fill Set with Write
+1 F0011100
+1 F0111100
+1 F0211100
+1 F0311100
+1 F0411100
+1 F0511100
+1 F0611100
+1 F0711100
+#Print
+#9 00011100
+
+# Invalidate Tags F01 F03 F05 and F07
+4 F0111100
+4 F0311100
+4 F0511100
+4 F0711100
+#Print
+#9 00011100
+
+# Write and Replace Invalidated Tags F01
+1 F0811100
+# Read and Replace Invalidated Tags F03
+0 F0911100
+#Print to Check What is Replaced
+#9 00011100
+
+# Read and Replace Invalidated Tags F05
+0 F0A11100
+# Write and Replace Invalidated Tags F07
+1 F0B11100
+#Print to Check What is Replaced
+#9 00011100
+
+# Write and Replace Based on LRU Tags F00
+1 F0C11100
+# Read and Replace Based on LRU Tags F02
+0 F0D11100
+#Print to Check What is Replaced
+#9 00011100
+
+#Read and Replace Based on LRU Tags F04
+0 F0E11100
+# Write and Replace Based on LRU Tags F06
+1 F0F11100
+#Print to Check What is Replaced
+#9 00011100
+

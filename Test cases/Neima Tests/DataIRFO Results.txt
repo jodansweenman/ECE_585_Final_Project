@@ -1,0 +1,90 @@
+Microsoft Windows [Version 10.0.19041.804]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\neima>cd C:\Users\neima\Desktop\ECE_585_Final_Project-main\Test cases
+
+C:\Users\neima\Desktop\ECE_585_Final_Project-main\Test cases>ECE585.exe DataIRFO.txt
+Resetting the Cache Controller and Clearing Stats...
+
+         Select Mode
+Mode 0: Summary of usage statistics and print commands only
+Mode 1: Information from Mode 0 with messages to L2 in addition
+Mode 2: Information from previous modes with information for every cache hit
+
+Enter Mode: 2
+Resetting the Cache Controller and Clearing Stats...
+Data Cache Miss: Write to L2 f0000100 [Write-Through]
+Data Cache Miss: Write to L2 f0100100 [Write-Through]
+Data Cache Miss: Write to L2 f0200100 [Write-Through]
+Data Cache Miss: Write to L2 f0300100 [Write-Through]
+Data Cache Miss: Write to L2 f0400100 [Write-Through]
+Data Cache Miss: Write to L2 f0500100 [Write-Through]
+Data Cache Miss: Write to L2 f0600100 [Write-Through]
+Data Cache Miss: Write to L2 f0700100 [Write-Through]
+Data Cache Miss: Write to L2 f0800100 [Write-Through]
+Read for Ownership from L2 f0800100
+Data Cache Miss: Write to L2 f0900100 [Write-Through]
+Read for Ownership from L2 f0900100
+Data Cache Miss: Write to L2 f0a00100 [Write-Through]
+Read for Ownership from L2 f0a00100
+Data Cache Miss: Write to L2 f0b00100 [Write-Through]
+Read for Ownership from L2 f0b00100
+Data Cache Miss: Write to L2 f0c00100 [Write-Through]
+Read for Ownership from L2 f0c00100
+Data Cache Miss: Write to L2 f0d00100 [Write-Through]
+Read for Ownership from L2 f0d00100
+Data Cache Miss: Write to L2 f0e00100 [Write-Through]
+Read for Ownership from L2 f0e00100
+Data Cache Miss: Write to L2 f0f00100 [Write-Through]
+Read for Ownership from L2 f0f00100
+Data Cache Miss: Write to L2 f0001100 [Write-Through]
+Data Cache Miss: Write to L2 f0101100 [Write-Through]
+Data Cache Miss: Write to L2 f0201100 [Write-Through]
+Data Cache Miss: Write to L2 f0301100 [Write-Through]
+Data Cache Miss: Write to L2 f0401100 [Write-Through]
+Data Cache Miss: Write to L2 f0501100 [Write-Through]
+Data Cache Miss: Write to L2 f0601100 [Write-Through]
+Data Cache Miss: Write to L2 f0701100 [Write-Through]
+Data Cache Miss: Write to L2 f0801100 [Write-Through]
+Read for Ownership from L2 f0801100
+Data Cache Miss: Read from L2 f0901100 [Data]
+Data Cache Miss: Read from L2 f0a01100 [Data]
+Data Cache Miss: Write to L2 f0b01100 [Write-Through]
+Read for Ownership from L2 f0b01100
+Data Cache Miss: Write to L2 f0c01100 [Write-Through]
+Read for Ownership from L2 f0c01100
+Data Cache Miss: Read from L2 f0d01100 [Data]
+Data Cache Miss: Read from L2 f0e01100 [Data]
+Data Cache Miss: Write to L2 f0f01100 [Write-Through]
+Read for Ownership from L2 f0f01100
+Data Cache Miss: Write to L2 f0011100 [Write-Through]
+Data Cache Miss: Write to L2 f0111100 [Write-Through]
+Data Cache Miss: Write to L2 f0211100 [Write-Through]
+Data Cache Miss: Write to L2 f0311100 [Write-Through]
+Data Cache Miss: Write to L2 f0411100 [Write-Through]
+Data Cache Miss: Write to L2 f0511100 [Write-Through]
+Data Cache Miss: Write to L2 f0611100 [Write-Through]
+Data Cache Miss: Write to L2 f0711100 [Write-Through]
+Return data to L2 f0111100
+Return data to L2 f0311100
+Return data to L2 f0511100
+Return data to L2 f0711100
+Data Cache Miss: Write to L2 f0811100 [Write-Through]
+Read for Ownership from L2 f0811100
+Data Cache Miss: Read from L2 f0911100 [Data]
+Data Cache Miss: Read from L2 f0a11100 [Data]
+Data Cache Miss: Write to L2 f0b11100 [Write-Through]
+Read for Ownership from L2 f0b11100
+Data Cache Miss: Write to L2 f0c11100 [Write-Through]
+Read for Ownership from L2 f0c11100
+Data Cache Miss: Read from L2 f0d11100 [Data]
+Data Cache Miss: Read from L2 f0e11100 [Data]
+Data Cache Miss: Write to L2 f0f11100 [Write-Through]
+Read for Ownership from L2 f0f11100
+
+
+         Testing Completed: Closing Program...
+
+
+
+C:\Users\neima\Desktop\ECE_585_Final_Project-main\Test cases>
