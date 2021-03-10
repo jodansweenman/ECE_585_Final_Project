@@ -284,20 +284,11 @@ int main(int argc, char** argv) {
 				data_cache[cache_way][set].MESI = 'S';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
-				// Simulate L2 Cache Read
-				if (mode > 0) {
-					cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data]" << endl;
-				}
 				break;
 		}
 	}
 	else {												// Data Cache Miss
 		stats.data_cache_miss++;
-		
-		// Simulate L2 Cache Read
-		if (mode > 0) {
-			cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data]" << endl;
-		}
 		
 		// Check for an empty set in the cache line
  		for (int i = 0; cache_way < 0 && i < 8; ++i) {
@@ -315,6 +306,10 @@ int main(int argc, char** argv) {
 			data_cache[cache_way][set].address = addr;
 			// LRU Data Update
 			data_LRU_update(cache_way,set,empty_cache);
+			// Simulate L2 Cache Read
+			if (mode > 0) {
+				cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data]" << endl;
+			}
 		}
 		else {
 			// Check for a line with invalid MESI data to evict
@@ -422,18 +417,14 @@ int cache_write(unsigned int addr) {
 				data_cache[cache_way][set].MESI = 'E';
 				data_cache[cache_way][set].address = addr;
 				data_LRU_update(cache_way,set,empty_cache);
-				if (mode > 0) {
-					cout << "Data Cache Miss: Write to L2 " << hex << addr << " [Write-Through]" << endl;
-				}
 				break;
 		}
 	}
 	else {												// Data Cache Miss
 		stats.data_cache_miss++;
-		
-		// Simulate L2 cache write-through message
+		// Simulate L2 Cache RFO message
 		if (mode > 0) {
-			cout << "Data Cache Miss: Write to L2 " << hex << addr << " [Write-Through]" << endl;
+			cout << "Read for Ownership from L2 " << hex << addr << endl;
 		}
 		
 		// Check for an empty set in the cache line
@@ -452,13 +443,12 @@ int cache_write(unsigned int addr) {
 			data_cache[cache_way][set].address = addr;
 			// LRU Data Update
 			data_LRU_update(cache_way,set,empty_cache);
+			// Simulate L2 cache write-through message
+			if (mode > 0) {
+				cout << "Data Cache Miss: Write to L2 " << hex << addr << " [Write-Through]" << endl;
+			}
 		}
 		else {
-			// Simulate L2 Cache RFO message
-			if (mode > 0) {
-				cout << "Read for Ownership from L2 " << hex << addr << endl;
-			}
-			
 			// Check for a line with invalid MESI data to evict
 			for (int j = 0; j < 8; ++j) {
 				if(data_cache[j][set].MESI == 'I') {
@@ -565,20 +555,12 @@ int instruction_fetch(unsigned int addr) {
 				instruction_cache[cache_way][set].MESI = 'S';
 				instruction_cache[cache_way][set].address = addr;
 				instruction_LRU_update(cache_way,set,empty_cache);
-				// Simulate L2 Instruction Cache Read
-				if(mode > 0) {
-					cout << "Instruction Cache Miss: Read from L2 " << hex << addr << " [Instruction]" << endl;
-				}
 				break;
 		}
 	}
 	else {												// Instruction Cache Miss
 		stats.inst_cache_miss++;
 		
-		// Simulate L2 Instruction Cache Read
-		if(mode > 0) {
-			cout << "Instruction Cache Miss: Read from L2 " << hex << addr << " [Instruction]" << endl;
-		}
 		// Check  for an empty set in the cache line
 		for (int i = 0; cache_way < 0 && i < 4; ++i) {
 	 		if (instruction_cache[i][set].tag == 4096) {
@@ -593,6 +575,10 @@ int instruction_fetch(unsigned int addr) {
 			instruction_cache[cache_way][set].address = addr;
 			// LRU instruction Update
 			instruction_LRU_update(cache_way,set,empty_cache);
+			// Simulate L2 Instruction Cache Read
+			if(mode > 0) {
+				cout << "Instruction Cache Miss: Read from L2 " << hex << addr << " [Instruction]" << endl;
+			}
 		}
 		else {
 			// Check for a line with invalid MESI data to evict
