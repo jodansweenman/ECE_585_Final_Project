@@ -1,0 +1,1080 @@
+Resetting the Cache Controller and Clearing Stats...
+
+         Select Mode
+Mode 0: Summary of usage statistics and print commands only
+Mode 1: Information from Mode 0 with messages to L2 in addition
+Mode 2: Information from previous modes with information for every cache hit
+
+Enter Mode: 1
+Resetting the Cache Controller and Clearing Stats...
+Read for Ownership from L2 f0000100
+Data Cache Miss: Write to L2 f0000100 [Write-Through]
+Data Cache Miss: Read from L2 f0100100 [Data]
+Read for Ownership from L2 f0200100
+Data Cache Miss: Write to L2 f0200100 [Write-Through]
+Data Cache Miss: Read from L2 f0300100 [Data]
+Read for Ownership from L2 f0400100
+Data Cache Miss: Write to L2 f0400100 [Write-Through]
+Data Cache Miss: Read from L2 f0500100 [Data]
+Read for Ownership from L2 f0600100
+Data Cache Miss: Write to L2 f0600100 [Write-Through]
+Data Cache Miss: Read from L2 f0700100 [Data]
+Data Cache Miss: Read from L2 f0800100 [Data] and evict 21dae820
+Read for Ownership from L2 f0900100
+Data Cache Miss: Write to L2 f0900100 [Data] and evict 21dae820
+Data Cache Miss: Read from L2 f0a00100 [Data] and evict 21dae820
+Read for Ownership from L2 f0b00100
+Data Cache Miss: Write to L2 f0b00100 [Data] and evict 21dae820
+Data Cache Miss: Read from L2 f0c00100 [Data] and evict 21dae820
+Data Cache Miss: Read from L2 f0d00100 [Data] and evict 21dae820
+Read for Ownership from L2 f0e00100
+Data Cache Miss: Write to L2 f0e00100 [Data] and evict 21dae820
+Read for Ownership from L2 f0f00100
+Data Cache Miss: Write to L2 f0f00100 [Data] and evict 21dae820
+Read for Ownership from L2 f0001100
+Data Cache Miss: Write to L2 f0001100 [Write-Through]
+Read for Ownership from L2 f0101100
+Data Cache Miss: Write to L2 f0101100 [Write-Through]
+Data Cache Miss: Read from L2 f0201100 [Data]
+Data Cache Miss: Read from L2 f0301100 [Data]
+Read for Ownership from L2 f0401100
+Data Cache Miss: Write to L2 f0401100 [Write-Through]
+Read for Ownership from L2 f0501100
+Data Cache Miss: Write to L2 f0501100 [Write-Through]
+Data Cache Miss: Read from L2 f0601100 [Data]
+Data Cache Miss: Read from L2 f0701100 [Data]
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0001100 Tag: f00 Set: 44 LRU: 0 MESI State: M
+Way No: 1
+Address: f0101100 Tag: f01 Set: 44 LRU: 1 MESI State: I
+Way No: 2
+Address: f0201100 Tag: f02 Set: 44 LRU: 2 MESI State: E
+Way No: 3
+Address: f0301100 Tag: f03 Set: 44 LRU: 3 MESI State: I
+Way No: 4
+Address: f0401100 Tag: f04 Set: 44 LRU: 4 MESI State: M
+Way No: 5
+Address: f0501100 Tag: f05 Set: 44 LRU: 5 MESI State: I
+Way No: 6
+Address: f0601100 Tag: f06 Set: 44 LRU: 6 MESI State: E
+Way No: 7
+Address: f0701100 Tag: f07 Set: 44 LRU: 7 MESI State: I
+
+
+                        INSTRUCTION CACHE
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 24
+Data Cache Hit/Miss Ratio: 0.25
+Data Cache Reads: 16
+Data Cache Writes: 16
+No Instruction Cache Transactions Occured
+Read for Ownership from L2 f0801100
+Data Cache Miss: Write to L2 f0801100 [Data] and evict 48000187
+Data Cache Miss: Read from L2 f0901100 [Data] and evict 48000187
+Data Cache Miss: Read from L2 f0a01100 [Data] and evict 48000187
+Read for Ownership from L2 f0b01100
+Data Cache Miss: Write to L2 f0b01100 [Data] and evict 48000187
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0901100 Tag: f09 Set: 44 LRU: 5 MESI State: E
+Way No: 1
+Address: f0a01100 Tag: f0a Set: 44 LRU: 6 MESI State: E
+Way No: 2
+Address: f0b01100 Tag: f0b Set: 44 LRU: 7 MESI State: M
+Way No: 3
+Address: f0301100 Tag: f03 Set: 44 LRU: 0 MESI State: I
+Way No: 4
+Address: f0401100 Tag: f04 Set: 44 LRU: 1 MESI State: M
+Way No: 5
+Address: f0501100 Tag: f05 Set: 44 LRU: 2 MESI State: I
+Way No: 6
+Address: f0601100 Tag: f06 Set: 44 LRU: 3 MESI State: E
+Way No: 7
+Address: f0801100 Tag: f08 Set: 44 LRU: 4 MESI State: M
+
+
+                        INSTRUCTION CACHE
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 28
+Data Cache Hit/Miss Ratio: 0.222222
+Data Cache Reads: 18
+Data Cache Writes: 18
+No Instruction Cache Transactions Occured
+Read for Ownership from L2 f0c01100
+Data Cache Miss: Write to L2 f0c01100 [Data] and evict 48000187
+Data Cache Miss: Read from L2 f0d01100 [Data] and evict 48000187
+Data Cache Miss: Read from L2 f0e01100 [Data] and evict 48000187
+Read for Ownership from L2 f0f01100
+Data Cache Miss: Write to L2 f0f01100 [Data] and evict 48000187
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0901100 Tag: f09 Set: 44 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a01100 Tag: f0a Set: 44 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b01100 Tag: f0b Set: 44 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c01100 Tag: f0c Set: 44 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d01100 Tag: f0d Set: 44 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e01100 Tag: f0e Set: 44 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f01100 Tag: f0f Set: 44 LRU: 7 MESI State: M
+Way No: 7
+Address: f0801100 Tag: f08 Set: 44 LRU: 0 MESI State: M
+
+
+                        INSTRUCTION CACHE
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 32
+Data Cache Hit/Miss Ratio: 0.2
+Data Cache Reads: 20
+Data Cache Writes: 20
+No Instruction Cache Transactions Occured
+Data Cache Miss: Read from L2 f0011100 [Data]
+Data Cache Miss: Read from L2 f0111100 [Data]
+Read for Ownership from L2 f0211100
+Data Cache Miss: Write to L2 f0211100 [Write-Through]
+Read for Ownership from L2 f0311100
+Data Cache Miss: Write to L2 f0311100 [Write-Through]
+Data Cache Miss: Read from L2 f0411100 [Data]
+Data Cache Miss: Read from L2 f0511100 [Data]
+Read for Ownership from L2 f0611100
+Data Cache Miss: Write to L2 f0611100 [Write-Through]
+Read for Ownership from L2 f0711100
+Data Cache Miss: Write to L2 f0711100 [Write-Through]
+Return data to L2 f0111100
+Return data to L2 f0311100
+Return data to L2 f0511100
+Return data to L2 f0711100
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0901100 Tag: f09 Set: 44 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a01100 Tag: f0a Set: 44 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b01100 Tag: f0b Set: 44 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c01100 Tag: f0c Set: 44 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d01100 Tag: f0d Set: 44 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e01100 Tag: f0e Set: 44 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f01100 Tag: f0f Set: 44 LRU: 7 MESI State: M
+Way No: 7
+Address: f0801100 Tag: f08 Set: 44 LRU: 0 MESI State: M
+Set No: 444
+Way No: 0
+Address: f0011100 Tag: f00 Set: 444 LRU: 0 MESI State: E
+Way No: 1
+Address: f0111100 Tag: f01 Set: 444 LRU: 1 MESI State: I
+Way No: 2
+Address: f0211100 Tag: f02 Set: 444 LRU: 2 MESI State: M
+Way No: 3
+Address: f0311100 Tag: f03 Set: 444 LRU: 3 MESI State: I
+Way No: 4
+Address: f0411100 Tag: f04 Set: 444 LRU: 4 MESI State: E
+Way No: 5
+Address: f0511100 Tag: f05 Set: 444 LRU: 5 MESI State: I
+Way No: 6
+Address: f0611100 Tag: f06 Set: 444 LRU: 6 MESI State: M
+Way No: 7
+Address: f0711100 Tag: f07 Set: 444 LRU: 7 MESI State: I
+
+
+                        INSTRUCTION CACHE
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 40
+Data Cache Hit/Miss Ratio: 0.166667
+Data Cache Reads: 24
+Data Cache Writes: 24
+No Instruction Cache Transactions Occured
+Read for Ownership from L2 f0811100
+Data Cache Miss: Write to L2 f0811100 [Data] and evict 1c883c7
+Data Cache Miss: Read from L2 f0911100 [Data] and evict 1c883c7
+Data Cache Miss: Read from L2 f0a11100 [Data] and evict 1c883c7
+Read for Ownership from L2 f0b11100
+Data Cache Miss: Write to L2 f0b11100 [Data] and evict 1c883c7
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0901100 Tag: f09 Set: 44 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a01100 Tag: f0a Set: 44 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b01100 Tag: f0b Set: 44 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c01100 Tag: f0c Set: 44 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d01100 Tag: f0d Set: 44 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e01100 Tag: f0e Set: 44 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f01100 Tag: f0f Set: 44 LRU: 7 MESI State: M
+Way No: 7
+Address: f0801100 Tag: f08 Set: 44 LRU: 0 MESI State: M
+Set No: 444
+Way No: 0
+Address: f0911100 Tag: f09 Set: 444 LRU: 5 MESI State: E
+Way No: 1
+Address: f0a11100 Tag: f0a Set: 444 LRU: 6 MESI State: E
+Way No: 2
+Address: f0b11100 Tag: f0b Set: 444 LRU: 7 MESI State: M
+Way No: 3
+Address: f0311100 Tag: f03 Set: 444 LRU: 0 MESI State: I
+Way No: 4
+Address: f0411100 Tag: f04 Set: 444 LRU: 1 MESI State: E
+Way No: 5
+Address: f0511100 Tag: f05 Set: 444 LRU: 2 MESI State: I
+Way No: 6
+Address: f0611100 Tag: f06 Set: 444 LRU: 3 MESI State: M
+Way No: 7
+Address: f0811100 Tag: f08 Set: 444 LRU: 4 MESI State: M
+
+
+                        INSTRUCTION CACHE
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 44
+Data Cache Hit/Miss Ratio: 0.153846
+Data Cache Reads: 26
+Data Cache Writes: 26
+No Instruction Cache Transactions Occured
+Read for Ownership from L2 f0c11100
+Data Cache Miss: Write to L2 f0c11100 [Data] and evict 1c883c7
+Data Cache Miss: Read from L2 f0d11100 [Data] and evict 1c883c7
+Data Cache Miss: Read from L2 f0e11100 [Data] and evict 1c883c7
+Read for Ownership from L2 f0f11100
+Data Cache Miss: Write to L2 f0f11100 [Data] and evict 1c883c7
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0901100 Tag: f09 Set: 44 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a01100 Tag: f0a Set: 44 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b01100 Tag: f0b Set: 44 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c01100 Tag: f0c Set: 44 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d01100 Tag: f0d Set: 44 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e01100 Tag: f0e Set: 44 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f01100 Tag: f0f Set: 44 LRU: 7 MESI State: M
+Way No: 7
+Address: f0801100 Tag: f08 Set: 44 LRU: 0 MESI State: M
+Set No: 444
+Way No: 0
+Address: f0911100 Tag: f09 Set: 444 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a11100 Tag: f0a Set: 444 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b11100 Tag: f0b Set: 444 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c11100 Tag: f0c Set: 444 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d11100 Tag: f0d Set: 444 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e11100 Tag: f0e Set: 444 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f11100 Tag: f0f Set: 444 LRU: 7 MESI State: M
+Way No: 7
+Address: f0811100 Tag: f08 Set: 444 LRU: 0 MESI State: M
+
+
+                        INSTRUCTION CACHE
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 48
+Data Cache Hit/Miss Ratio: 0.142857
+Data Cache Reads: 28
+Data Cache Writes: 28
+No Instruction Cache Transactions Occured
+Instruction Cache Miss: Read from L2 f0000100 [Instruction]
+Instruction Cache Miss: Read from L2 f0100100 [Instruction]
+Instruction Cache Miss: Read from L2 f0200100 [Instruction]
+Instruction Cache Miss: Read from L2 f0300100 [Instruction]
+Instruction Cache Miss: Read from L2 f0400100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0500100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0600100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0700100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0000100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0100100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0200100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0300100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0400100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0500100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0600100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0700100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0800100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0900100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0a00100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0b00100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0c00100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0d00100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0e00100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0f00100 [Instruction] and evict f0f00100
+Instruction Cache Miss: Read from L2 f0001100 [Instruction]
+Instruction Cache Miss: Read from L2 f0101100 [Instruction]
+Instruction Cache Miss: Read from L2 f0201100 [Instruction]
+Instruction Cache Miss: Read from L2 f0301100 [Instruction]
+Instruction Cache Miss: Read from L2 f0401100 [Instruction] and evict f0801100
+Instruction Cache Miss: Read from L2 f0501100 [Instruction] and evict f0801100
+Instruction Cache Miss: Read from L2 f0601100 [Instruction] and evict f0801100
+Instruction Cache Miss: Read from L2 f0701100 [Instruction] and evict f0801100
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0901100 Tag: f09 Set: 44 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a01100 Tag: f0a Set: 44 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b01100 Tag: f0b Set: 44 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c01100 Tag: f0c Set: 44 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d01100 Tag: f0d Set: 44 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e01100 Tag: f0e Set: 44 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f01100 Tag: f0f Set: 44 LRU: 7 MESI State: M
+Way No: 7
+Address: f0801100 Tag: f08 Set: 44 LRU: 0 MESI State: M
+Set No: 444
+Way No: 0
+Address: f0911100 Tag: f09 Set: 444 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a11100 Tag: f0a Set: 444 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b11100 Tag: f0b Set: 444 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c11100 Tag: f0c Set: 444 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d11100 Tag: f0d Set: 444 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e11100 Tag: f0e Set: 444 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f11100 Tag: f0f Set: 444 LRU: 7 MESI State: M
+Way No: 7
+Address: f0811100 Tag: f08 Set: 444 LRU: 0 MESI State: M
+
+
+                        INSTRUCTION CACHE
+Set No: 4
+Way No: 0
+Address: f0c00100 Tag: f0c Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0d00100 Tag: f0d Set: 4 LRU: 1 MESI State: E
+Way No: 2
+Address: f0e00100 Tag: f0e Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0f00100 Tag: f0f Set: 4 LRU: 3 MESI State: E
+Set No: 44
+Way No: 0
+Address: f0401100 Tag: f04 Set: 44 LRU: 0 MESI State: E
+Way No: 1
+Address: f0501100 Tag: f05 Set: 44 LRU: 1 MESI State: E
+Way No: 2
+Address: f0601100 Tag: f06 Set: 44 LRU: 2 MESI State: E
+Way No: 3
+Address: f0701100 Tag: f07 Set: 44 LRU: 3 MESI State: E
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 48
+Data Cache Hit/Miss Ratio: 0.142857
+Data Cache Reads: 28
+Data Cache Writes: 28
+
+INSTRUCTION CACHE:
+Instruction Cache Hits: 0
+Instruction Cache Misses: 32
+Instruction Cache Hit/Miss Ratio: 0
+Instruction Cache Reads: 32
+Instruction Cache Miss: Read from L2 f0801100 [Instruction] and evict f0801100
+Instruction Cache Miss: Read from L2 f0901100 [Instruction] and evict f0801100
+Instruction Cache Miss: Read from L2 f0a01100 [Instruction] and evict f0801100
+Instruction Cache Miss: Read from L2 f0b01100 [Instruction] and evict f0801100
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0901100 Tag: f09 Set: 44 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a01100 Tag: f0a Set: 44 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b01100 Tag: f0b Set: 44 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c01100 Tag: f0c Set: 44 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d01100 Tag: f0d Set: 44 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e01100 Tag: f0e Set: 44 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f01100 Tag: f0f Set: 44 LRU: 7 MESI State: M
+Way No: 7
+Address: f0801100 Tag: f08 Set: 44 LRU: 0 MESI State: M
+Set No: 444
+Way No: 0
+Address: f0911100 Tag: f09 Set: 444 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a11100 Tag: f0a Set: 444 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b11100 Tag: f0b Set: 444 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c11100 Tag: f0c Set: 444 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d11100 Tag: f0d Set: 444 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e11100 Tag: f0e Set: 444 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f11100 Tag: f0f Set: 444 LRU: 7 MESI State: M
+Way No: 7
+Address: f0811100 Tag: f08 Set: 444 LRU: 0 MESI State: M
+
+
+                        INSTRUCTION CACHE
+Set No: 4
+Way No: 0
+Address: f0c00100 Tag: f0c Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0d00100 Tag: f0d Set: 4 LRU: 1 MESI State: E
+Way No: 2
+Address: f0e00100 Tag: f0e Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0f00100 Tag: f0f Set: 4 LRU: 3 MESI State: E
+Set No: 44
+Way No: 0
+Address: f0801100 Tag: f08 Set: 44 LRU: 0 MESI State: E
+Way No: 1
+Address: f0901100 Tag: f09 Set: 44 LRU: 1 MESI State: E
+Way No: 2
+Address: f0a01100 Tag: f0a Set: 44 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b01100 Tag: f0b Set: 44 LRU: 3 MESI State: E
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 48
+Data Cache Hit/Miss Ratio: 0.142857
+Data Cache Reads: 28
+Data Cache Writes: 28
+
+INSTRUCTION CACHE:
+Instruction Cache Hits: 0
+Instruction Cache Misses: 36
+Instruction Cache Hit/Miss Ratio: 0
+Instruction Cache Reads: 36
+Instruction Cache Miss: Read from L2 f0c01100 [Instruction] and evict f0801100
+Instruction Cache Miss: Read from L2 f0d01100 [Instruction] and evict f0801100
+Instruction Cache Miss: Read from L2 f0e01100 [Instruction] and evict f0801100
+Instruction Cache Miss: Read from L2 f0f01100 [Instruction] and evict f0801100
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0901100 Tag: f09 Set: 44 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a01100 Tag: f0a Set: 44 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b01100 Tag: f0b Set: 44 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c01100 Tag: f0c Set: 44 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d01100 Tag: f0d Set: 44 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e01100 Tag: f0e Set: 44 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f01100 Tag: f0f Set: 44 LRU: 7 MESI State: M
+Way No: 7
+Address: f0801100 Tag: f08 Set: 44 LRU: 0 MESI State: M
+Set No: 444
+Way No: 0
+Address: f0911100 Tag: f09 Set: 444 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a11100 Tag: f0a Set: 444 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b11100 Tag: f0b Set: 444 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c11100 Tag: f0c Set: 444 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d11100 Tag: f0d Set: 444 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e11100 Tag: f0e Set: 444 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f11100 Tag: f0f Set: 444 LRU: 7 MESI State: M
+Way No: 7
+Address: f0811100 Tag: f08 Set: 444 LRU: 0 MESI State: M
+
+
+                        INSTRUCTION CACHE
+Set No: 4
+Way No: 0
+Address: f0c00100 Tag: f0c Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0d00100 Tag: f0d Set: 4 LRU: 1 MESI State: E
+Way No: 2
+Address: f0e00100 Tag: f0e Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0f00100 Tag: f0f Set: 4 LRU: 3 MESI State: E
+Set No: 44
+Way No: 0
+Address: f0c01100 Tag: f0c Set: 44 LRU: 0 MESI State: E
+Way No: 1
+Address: f0d01100 Tag: f0d Set: 44 LRU: 1 MESI State: E
+Way No: 2
+Address: f0e01100 Tag: f0e Set: 44 LRU: 2 MESI State: E
+Way No: 3
+Address: f0f01100 Tag: f0f Set: 44 LRU: 3 MESI State: E
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 48
+Data Cache Hit/Miss Ratio: 0.142857
+Data Cache Reads: 28
+Data Cache Writes: 28
+
+INSTRUCTION CACHE:
+Instruction Cache Hits: 0
+Instruction Cache Misses: 40
+Instruction Cache Hit/Miss Ratio: 0
+Instruction Cache Reads: 40
+Instruction Cache Miss: Read from L2 f0011100 [Instruction]
+Instruction Cache Miss: Read from L2 f0111100 [Instruction]
+Instruction Cache Miss: Read from L2 f0211100 [Instruction]
+Instruction Cache Miss: Read from L2 f0311100 [Instruction]
+Instruction Cache Miss: Read from L2 f0411100 [Instruction] and evict f0811100
+Instruction Cache Miss: Read from L2 f0511100 [Instruction] and evict f0811100
+Instruction Cache Miss: Read from L2 f0611100 [Instruction] and evict f0811100
+Instruction Cache Miss: Read from L2 f0711100 [Instruction] and evict f0811100
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0901100 Tag: f09 Set: 44 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a01100 Tag: f0a Set: 44 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b01100 Tag: f0b Set: 44 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c01100 Tag: f0c Set: 44 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d01100 Tag: f0d Set: 44 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e01100 Tag: f0e Set: 44 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f01100 Tag: f0f Set: 44 LRU: 7 MESI State: M
+Way No: 7
+Address: f0801100 Tag: f08 Set: 44 LRU: 0 MESI State: M
+Set No: 444
+Way No: 0
+Address: f0911100 Tag: f09 Set: 444 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a11100 Tag: f0a Set: 444 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b11100 Tag: f0b Set: 444 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c11100 Tag: f0c Set: 444 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d11100 Tag: f0d Set: 444 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e11100 Tag: f0e Set: 444 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f11100 Tag: f0f Set: 444 LRU: 7 MESI State: M
+Way No: 7
+Address: f0811100 Tag: f08 Set: 444 LRU: 0 MESI State: M
+
+
+                        INSTRUCTION CACHE
+Set No: 4
+Way No: 0
+Address: f0c00100 Tag: f0c Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0d00100 Tag: f0d Set: 4 LRU: 1 MESI State: E
+Way No: 2
+Address: f0e00100 Tag: f0e Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0f00100 Tag: f0f Set: 4 LRU: 3 MESI State: E
+Set No: 44
+Way No: 0
+Address: f0c01100 Tag: f0c Set: 44 LRU: 0 MESI State: E
+Way No: 1
+Address: f0d01100 Tag: f0d Set: 44 LRU: 1 MESI State: E
+Way No: 2
+Address: f0e01100 Tag: f0e Set: 44 LRU: 2 MESI State: E
+Way No: 3
+Address: f0f01100 Tag: f0f Set: 44 LRU: 3 MESI State: E
+Set No: 444
+Way No: 0
+Address: f0411100 Tag: f04 Set: 444 LRU: 0 MESI State: E
+Way No: 1
+Address: f0511100 Tag: f05 Set: 444 LRU: 1 MESI State: E
+Way No: 2
+Address: f0611100 Tag: f06 Set: 444 LRU: 2 MESI State: E
+Way No: 3
+Address: f0711100 Tag: f07 Set: 444 LRU: 3 MESI State: E
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 48
+Data Cache Hit/Miss Ratio: 0.142857
+Data Cache Reads: 28
+Data Cache Writes: 28
+
+INSTRUCTION CACHE:
+Instruction Cache Hits: 0
+Instruction Cache Misses: 48
+Instruction Cache Hit/Miss Ratio: 0
+Instruction Cache Reads: 48
+Instruction Cache Miss: Read from L2 f0811100 [Instruction] and evict f0811100
+Instruction Cache Miss: Read from L2 f0911100 [Instruction] and evict f0811100
+Instruction Cache Miss: Read from L2 f0a11100 [Instruction] and evict f0811100
+Instruction Cache Miss: Read from L2 f0b11100 [Instruction] and evict f0811100
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0901100 Tag: f09 Set: 44 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a01100 Tag: f0a Set: 44 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b01100 Tag: f0b Set: 44 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c01100 Tag: f0c Set: 44 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d01100 Tag: f0d Set: 44 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e01100 Tag: f0e Set: 44 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f01100 Tag: f0f Set: 44 LRU: 7 MESI State: M
+Way No: 7
+Address: f0801100 Tag: f08 Set: 44 LRU: 0 MESI State: M
+Set No: 444
+Way No: 0
+Address: f0911100 Tag: f09 Set: 444 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a11100 Tag: f0a Set: 444 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b11100 Tag: f0b Set: 444 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c11100 Tag: f0c Set: 444 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d11100 Tag: f0d Set: 444 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e11100 Tag: f0e Set: 444 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f11100 Tag: f0f Set: 444 LRU: 7 MESI State: M
+Way No: 7
+Address: f0811100 Tag: f08 Set: 444 LRU: 0 MESI State: M
+
+
+                        INSTRUCTION CACHE
+Set No: 4
+Way No: 0
+Address: f0c00100 Tag: f0c Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0d00100 Tag: f0d Set: 4 LRU: 1 MESI State: E
+Way No: 2
+Address: f0e00100 Tag: f0e Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0f00100 Tag: f0f Set: 4 LRU: 3 MESI State: E
+Set No: 44
+Way No: 0
+Address: f0c01100 Tag: f0c Set: 44 LRU: 0 MESI State: E
+Way No: 1
+Address: f0d01100 Tag: f0d Set: 44 LRU: 1 MESI State: E
+Way No: 2
+Address: f0e01100 Tag: f0e Set: 44 LRU: 2 MESI State: E
+Way No: 3
+Address: f0f01100 Tag: f0f Set: 44 LRU: 3 MESI State: E
+Set No: 444
+Way No: 0
+Address: f0811100 Tag: f08 Set: 444 LRU: 0 MESI State: E
+Way No: 1
+Address: f0911100 Tag: f09 Set: 444 LRU: 1 MESI State: E
+Way No: 2
+Address: f0a11100 Tag: f0a Set: 444 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b11100 Tag: f0b Set: 444 LRU: 3 MESI State: E
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 48
+Data Cache Hit/Miss Ratio: 0.142857
+Data Cache Reads: 28
+Data Cache Writes: 28
+
+INSTRUCTION CACHE:
+Instruction Cache Hits: 0
+Instruction Cache Misses: 52
+Instruction Cache Hit/Miss Ratio: 0
+Instruction Cache Reads: 52
+Instruction Cache Miss: Read from L2 f0c11100 [Instruction] and evict f0811100
+Instruction Cache Miss: Read from L2 f0d11100 [Instruction] and evict f0811100
+Instruction Cache Miss: Read from L2 f0e11100 [Instruction] and evict f0811100
+Instruction Cache Miss: Read from L2 f0f11100 [Instruction] and evict f0811100
+
+
+                        DATA CACHE
+Set No: 4
+Way No: 0
+Address: f0800100 Tag: f08 Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0900100 Tag: f09 Set: 4 LRU: 1 MESI State: M
+Way No: 2
+Address: f0a00100 Tag: f0a Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0b00100 Tag: f0b Set: 4 LRU: 3 MESI State: M
+Way No: 4
+Address: f0c00100 Tag: f0c Set: 4 LRU: 4 MESI State: E
+Way No: 5
+Address: f0d00100 Tag: f0d Set: 4 LRU: 5 MESI State: E
+Way No: 6
+Address: f0e00100 Tag: f0e Set: 4 LRU: 6 MESI State: M
+Way No: 7
+Address: f0f00100 Tag: f0f Set: 4 LRU: 7 MESI State: M
+Set No: 44
+Way No: 0
+Address: f0901100 Tag: f09 Set: 44 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a01100 Tag: f0a Set: 44 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b01100 Tag: f0b Set: 44 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c01100 Tag: f0c Set: 44 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d01100 Tag: f0d Set: 44 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e01100 Tag: f0e Set: 44 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f01100 Tag: f0f Set: 44 LRU: 7 MESI State: M
+Way No: 7
+Address: f0801100 Tag: f08 Set: 44 LRU: 0 MESI State: M
+Set No: 444
+Way No: 0
+Address: f0911100 Tag: f09 Set: 444 LRU: 1 MESI State: E
+Way No: 1
+Address: f0a11100 Tag: f0a Set: 444 LRU: 2 MESI State: E
+Way No: 2
+Address: f0b11100 Tag: f0b Set: 444 LRU: 3 MESI State: M
+Way No: 3
+Address: f0c11100 Tag: f0c Set: 444 LRU: 4 MESI State: M
+Way No: 4
+Address: f0d11100 Tag: f0d Set: 444 LRU: 5 MESI State: E
+Way No: 5
+Address: f0e11100 Tag: f0e Set: 444 LRU: 6 MESI State: E
+Way No: 6
+Address: f0f11100 Tag: f0f Set: 444 LRU: 7 MESI State: M
+Way No: 7
+Address: f0811100 Tag: f08 Set: 444 LRU: 0 MESI State: M
+
+
+                        INSTRUCTION CACHE
+Set No: 4
+Way No: 0
+Address: f0c00100 Tag: f0c Set: 4 LRU: 0 MESI State: E
+Way No: 1
+Address: f0d00100 Tag: f0d Set: 4 LRU: 1 MESI State: E
+Way No: 2
+Address: f0e00100 Tag: f0e Set: 4 LRU: 2 MESI State: E
+Way No: 3
+Address: f0f00100 Tag: f0f Set: 4 LRU: 3 MESI State: E
+Set No: 44
+Way No: 0
+Address: f0c01100 Tag: f0c Set: 44 LRU: 0 MESI State: E
+Way No: 1
+Address: f0d01100 Tag: f0d Set: 44 LRU: 1 MESI State: E
+Way No: 2
+Address: f0e01100 Tag: f0e Set: 44 LRU: 2 MESI State: E
+Way No: 3
+Address: f0f01100 Tag: f0f Set: 44 LRU: 3 MESI State: E
+Set No: 444
+Way No: 0
+Address: f0c11100 Tag: f0c Set: 444 LRU: 0 MESI State: E
+Way No: 1
+Address: f0d11100 Tag: f0d Set: 444 LRU: 1 MESI State: E
+Way No: 2
+Address: f0e11100 Tag: f0e Set: 444 LRU: 2 MESI State: E
+Way No: 3
+Address: f0f11100 Tag: f0f Set: 444 LRU: 3 MESI State: E
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 8
+Data Cache Misses: 48
+Data Cache Hit/Miss Ratio: 0.142857
+Data Cache Reads: 28
+Data Cache Writes: 28
+
+INSTRUCTION CACHE:
+Instruction Cache Hits: 0
+Instruction Cache Misses: 56
+Instruction Cache Hit/Miss Ratio: 0
+Instruction Cache Reads: 56
+
+
+         Testing Completed: Closing Program...
+
+
+
+--------------------------------
+Process exited after 6.724 seconds with return value 0
+Press any key to continue . . .

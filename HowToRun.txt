@@ -1,0 +1,5 @@
+To Test this program, put the ECE585.exe into the same folder that contains your test trace.
+
+Simply type out the exe and the test trace filename, and press enter. It should look similar to the below statement.
+
+..\ECE_585_Final_Project>cache.exe trace.txt

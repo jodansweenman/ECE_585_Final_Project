@@ -805,8 +805,8 @@ void print_cache() {
 	int set_flag = 0;
 	
 	// Update values for cache hits/misses ratio
-	stats.data_ratio = float(stats.data_cache_hit)/float(stats.data_cache_miss);
-	stats.inst_ratio = float(stats.inst_cache_hit)/float(stats.inst_cache_miss);
+	stats.data_ratio = float(stats.data_cache_hit)/(float(stats.data_cache_miss)+float(stats.data_cache_hit));
+	stats.inst_ratio = float(stats.inst_cache_hit)/(float(stats.inst_cache_miss)+float(stats.inst_cache_hit));
 	
 	// Printing information for Data Cache
 	cout << "\n\n\t\t\tDATA CACHE" << endl;	

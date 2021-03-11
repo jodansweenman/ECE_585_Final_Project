@@ -1,0 +1,138 @@
+Resetting the Cache Controller and Clearing Stats...
+
+         Select Mode
+Mode 0: Summary of usage statistics and print commands only
+Mode 1: Information from Mode 0 with messages to L2 in addition
+Mode 2: Information from previous modes with information for every cache hit
+
+Enter Mode: 0
+
+
+                        DATA CACHE
+Set No: 31d8
+Way No: 0
+Address: 481c7631 Tag: 481 Set: 31d8 LRU: 3 MESI State: M
+Way No: 1
+Address: 582c7632 Tag: 582 Set: 31d8 LRU: 4 MESI State: E
+Way No: 2
+Address: 594c7615 Tag: 594 Set: 31d8 LRU: 5 MESI State: E
+Way No: 3
+Address: 621c7600 Tag: 621 Set: 31d8 LRU: 6 MESI State: E
+Way No: 4
+Address: 111c762c Tag: 111 Set: 31d8 LRU: 7 MESI State: M
+
+
+                        INSTRUCTION CACHE
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 1
+Data Cache Misses: 5
+Data Cache Hit/Miss Ratio: 0.166667
+Data Cache Reads: 3
+Data Cache Writes: 3
+No Instruction Cache Transactions Occured
+
+
+         Testing Completed: Closing Program...
+
+
+
+--------------------------------
+Process exited after 2.555 seconds with return value 0
+Press any key to continue . . .
+
+Resetting the Cache Controller and Clearing Stats...
+
+         Select Mode
+Mode 0: Summary of usage statistics and print commands only
+Mode 1: Information from Mode 0 with messages to L2 in addition
+Mode 2: Information from previous modes with information for every cache hit
+
+Enter Mode: 1
+Read for Ownership from L2 600babbb
+Data Cache Miss: Write to L2 600babbb [Write-Through]
+Return data to L2 600bab98
+Data Cache Miss: Read from L2 600bab98 [Data]
+Read for Ownership from L2 59312345
+Data Cache Miss: Write to L2 59312345 [Write-Through]
+Data Cache Miss: Read from L2 11112321 [Data]
+Read for Ownership from L2 25512330
+Data Cache Miss: Write to L2 25512330 [Write-Through]
+Read for Ownership from L2 26612335
+Data Cache Miss: Write to L2 26612335 [Write-Through]
+Data Cache Miss: Read from L2 59312325 [Data]
+Data Cache Miss: Read from L2 48312321 [Data]
+Data Cache Miss: Read from L2 77712321 [Data]
+Data Cache Miss: Read from L2 53512321 [Data]
+Data Cache Miss: Read from L2 22112321 [Data]
+Data Cache Miss: Read from L2 19812321 [Data] and evict 48d231e8
+Instruction Cache Miss: Read from L2 19812321 [Instruction]
+Instruction Cache Miss: Read from L2 20012321 [Instruction]
+Instruction Cache Miss: Read from L2 20212321 [Instruction]
+Instruction Cache Miss: Read from L2 20412321 [Instruction]
+
+
+                        DATA CACHE
+Set No: 48c
+Way No: 0
+Address: 19812321 Tag: 198 Set: 48c LRU: 6 MESI State: E
+Way No: 1
+Address: 25512330 Tag: 255 Set: 48c LRU: 0 MESI State: M
+Way No: 2
+Address: 26612335 Tag: 266 Set: 48c LRU: 1 MESI State: M
+Way No: 3
+Address: 59312325 Tag: 593 Set: 48c LRU: 2 MESI State: E
+Way No: 4
+Address: 48312321 Tag: 483 Set: 48c LRU: 3 MESI State: E
+Way No: 5
+Address: 77712321 Tag: 777 Set: 48c LRU: 4 MESI State: E
+Way No: 6
+Address: 53512321 Tag: 535 Set: 48c LRU: 7 MESI State: S
+Way No: 7
+Address: 22112321 Tag: 221 Set: 48c LRU: 5 MESI State: E
+Set No: 48d
+Way No: 0
+Address: 59312345 Tag: 593 Set: 48d LRU: 7 MESI State: M
+Set No: 2eae
+Way No: 0
+Address: 600bab98 Tag: 600 Set: 2eae LRU: 7 MESI State: S
+
+
+                        INSTRUCTION CACHE
+Set No: 48c
+Way No: 0
+Address: 19812321 Tag: 198 Set: 48c LRU: 0 MESI State: E
+Way No: 1
+Address: 20012321 Tag: 200 Set: 48c LRU: 1 MESI State: E
+Way No: 2
+Address: 20212321 Tag: 202 Set: 48c LRU: 2 MESI State: E
+Way No: 3
+Address: 20412321 Tag: 204 Set: 48c LRU: 3 MESI State: E
+
+
+                        CACHE STATISTICS
+
+DATA CACHE:
+Data Cache Hits: 2
+Data Cache Misses: 12
+Data Cache Hit/Miss Ratio: 0.142857
+Data Cache Reads: 9
+Data Cache Writes: 5
+
+INSTRUCTION CACHE:
+Instruction Cache Hits: 0
+Instruction Cache Misses: 4
+Instruction Cache Hit/Miss Ratio: 0
+Instruction Cache Reads: 4
+
+
+         Testing Completed: Closing Program...
+
+
+
+--------------------------------
+Process exited after 1.611 seconds with return value 0
+Press any key to continue . . .

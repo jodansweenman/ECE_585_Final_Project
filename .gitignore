@@ -54,7 +54,6 @@ dkms.conf
 # Other files
 *.o
 *.dev
-*.exe
 *.ico
 *.layout
 *.h
