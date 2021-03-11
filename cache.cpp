@@ -618,6 +618,9 @@ int instruction_fetch(unsigned int addr) {
 				}
 			}
 			else { 										// Else, the invalid member is evicted
+				if (mode > 0) {
+					cout << "Instruction Cache Miss: Read from L2 " << hex << addr << " [Instruction] and evict " << instruction_cache[cache_way][set].address << endl;
+				}
 				instruction_cache[cache_way][set].tag = tag;
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'E';
