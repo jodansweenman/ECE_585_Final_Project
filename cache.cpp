@@ -315,6 +315,9 @@ int main(int argc, char** argv) {
 			}
 		}
 		else {
+			if (mode > 0) {
+				cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data] and evict " << data_cache[cache_way][set].address << endl;
+			}
 			// Check for a line with invalid MESI data to evict
 			for (int j = 0; j < 8; ++j) {
 				if(data_cache[j][set].MESI == 'I') {
@@ -340,9 +343,6 @@ int main(int argc, char** argv) {
 				}
 			}
 			else { 										// Else, the invalid member is evicted
-				if (mode > 0) {
-					cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data] and evict " << data_cache[cache_way][set].address << endl;
-				}
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'E';
@@ -455,6 +455,9 @@ int cache_write(unsigned int addr) {
 			}
 		}
 		else {
+			if (mode > 0) {
+				cout << "Data Cache Miss: Write to L2 " << hex << addr << " [Data] and evict " << data_cache[cache_way][set].address << endl;
+			}
 			// Check for a line with invalid MESI data to evict
 			for (int j = 0; j < 8; ++j) {
 				if(data_cache[j][set].MESI == 'I') {
@@ -480,9 +483,6 @@ int cache_write(unsigned int addr) {
 				}
 			}
 			else { 										// Else, the invalid member is evicted
-				if (mode > 0) {
-					cout << "Data Cache Miss: Write to L2 " << hex << addr << " [Data] and evict " << data_cache[cache_way][set].address << endl;
-				}
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'M';
@@ -594,6 +594,9 @@ int instruction_fetch(unsigned int addr) {
 			}
 		}
 		else {
+			if (mode > 0) {
+				cout << "Instruction Cache Miss: Read from L2 " << hex << addr << " [Instruction] and evict " << instruction_cache[cache_way][set].address << endl;
+			}
 			// Check for a line with invalid MESI data to evict
 			for (int j = 0; j < 4; ++j) {
 				if(instruction_cache[j][set].MESI == 'I') {
@@ -618,9 +621,6 @@ int instruction_fetch(unsigned int addr) {
 				}
 			}
 			else { 										// Else, the invalid member is evicted
-				if (mode > 0) {
-					cout << "Instruction Cache Miss: Read from L2 " << hex << addr << " [Instruction] and evict " << instruction_cache[cache_way][set].address << endl;
-				}
 				instruction_cache[cache_way][set].tag = tag;
 				instruction_cache[cache_way][set].set = set;
 				instruction_cache[cache_way][set].MESI = 'E';
