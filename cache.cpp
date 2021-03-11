@@ -340,6 +340,9 @@ int main(int argc, char** argv) {
 				}
 			}
 			else { 										// Else, the invalid member is evicted
+				if (mode > 0) {
+					cout << "Data Cache Miss: Read from L2 " << hex << addr << " [Data] and evict " << data_cache[cache_way][set].address << endl;
+				}
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'E';
@@ -477,6 +480,9 @@ int cache_write(unsigned int addr) {
 				}
 			}
 			else { 										// Else, the invalid member is evicted
+				if (mode > 0) {
+					cout << "Data Cache Miss: Write to L2 " << hex << addr << " [Data] and evict " << data_cache[cache_way][set].address << endl;
+				}
 				data_cache[cache_way][set].tag = tag;
 				data_cache[cache_way][set].set = set;
 				data_cache[cache_way][set].MESI = 'M';
